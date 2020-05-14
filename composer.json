@@ -1,0 +1,30 @@
+{
+  "name": "thesgroup/magento2-testing-framework",
+  "description": "Testing framework for Magento 2 modules",
+  "homepage": "https://github.com/sashas777/magento2-testing-framework",
+  "type": "library",
+  "license": ["GPL-3.0"],
+  "keywords": ["magento", "automation", "magento2-library", "testing"],
+  "version": "1.0.0",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://repo.magento.com/"
+    }
+  ],
+  "require": {
+    "php": "~7.1.0||~7.2.0||~7.3.0",
+    "magento/framework": "102.0.*"
+  },
+  "authors": [
+    {
+      "name": "Alexander Lukyanov",
+      "email": "support@sashas.org"
+    }
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "~6.5.0",
+    "magento/magento-coding-standard": "^5.0",
+    "phpmd/phpmd": "@stable"
+  }
+}
