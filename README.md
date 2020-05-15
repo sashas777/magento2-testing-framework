@@ -25,7 +25,7 @@ Run PHP code style validation
 [Resource MFTF](https://github.com/magento/magento2-functional-testing-framework)
 
 ```bash
-vendor/bin/phpmd . text vendor/thesgroup/magento2-testing-framework/static/phpmd/ruleset.xml --exclude vendor/,Test/
+vendor/bin/phpmd . ansi vendor/thesgroup/magento2-testing-framework/static/phpmd/ruleset.xml --exclude vendor/,Test/
 ```
 
 Run PHP mess detector validation
