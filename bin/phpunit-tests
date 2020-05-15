@@ -1,0 +1,16 @@
+# Copyright © Magento, Inc. All rights reserved.
+# See COPYING.txt for license details.
+
+UNIT_COVERAGE_THRESHOLD=70
+
+set -e
+
+echo "==============================="
+echo "          UNIT TESTS"
+echo "==============================="
+vendor/bin/phpunit --c vendor/thesgroup/magento2-testing-framework/unit/phpunit.xml --log-junit test-reports/junit.xml --coverage-html test-coverage-html/ --coverage-clover clover.xml
+
+echo "==============================="
+echo "       UNIT TEST COVERAGE"
+echo "==============================="
+vendor/bin/coverage-check clover.xml $UNIT_COVERAGE_THRESHOLD
