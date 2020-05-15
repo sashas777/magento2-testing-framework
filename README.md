@@ -8,15 +8,15 @@ To use within your Magento 2 project you can use:
 composer require --dev thesgroup/magento2-testing-framework
 ```
 
-##Usage
+## Usage
 
-##PHPCS
+## PHPCS
 [Magento Conding Standard](https://github.com/magento/magento-coding-standard)
 
-##PHPMD
+## PHPMD
 
 
 ## PHPUnit
 
-####Variables
+#### Variables
 TESTS_TEMP_DIR - Temporary directory for generated classes
