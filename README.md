@@ -1,6 +1,13 @@
 ## Magento 2 Testing Framework
 Based on Magento 2 OOTB test suite. Optimized for single module tests
 
+## Installation
+To use within your Magento 2 project you can use:
+
+```bash
+composer require --dev thesgroup/magento2-testing-framework
+```
+
 ##Usage
 
 ##PHPCS
