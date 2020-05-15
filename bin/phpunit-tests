@@ -8,7 +8,7 @@ set -e
 echo "==============================="
 echo "          UNIT TESTS"
 echo "==============================="
-vendor/bin/phpunit --c vendor/thesgroup/magento2-testing-framework/unit/phpunit.xml --log-junit test-reports/junit.xml --coverage-html test-coverage-html/ --coverage-clover clover.xml
+vendor/bin/phpunit -c vendor/thesgroup/magento2-testing-framework/unit/phpunit.xml --log-junit test-reports/junit.xml --coverage-html test-coverage-html/ --coverage-clover clover.xml
 
 echo "==============================="
 echo "       UNIT TEST COVERAGE"
