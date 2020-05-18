@@ -15,7 +15,6 @@
   "require": {
     "php": "~7.1.0||~7.2.0||~7.3.0",
     "magento/framework": "102.0.*",
-    "magento/magento2-base": "*",
     "magento/magento-coding-standard": "^5.0",
     "rregeer/phpunit-coverage-check": "*",
     "phpunit/phpunit": "~6.5.0",
