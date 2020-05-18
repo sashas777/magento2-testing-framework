@@ -8,12 +8,17 @@
 use \Magento\Framework\App\Filesystem\DirectoryList;
 
 //phpcs:ignore Magento2.Functions.DiscouragedFunction
+define('BP', dirname(__DIR__ . '/../../../../'));
 $baseDir = realpath(__DIR__ . '/../../../../');
 // phpcs:ignore Magento2.Security.IncludeFile.FoundIncludeFile
 require $baseDir . '/vendor/autoload.php';
 // phpcs:ignore Magento2.Security.IncludeFile.FoundIncludeFile
 require $baseDir . '/vendor/squizlabs/php_codesniffer/autoload.php';
 $testsBaseDir = __DIR__ . '/static';
+
+$composerAutoloader = include $baseDir . '/vendor/autoload.php';
+AutoloaderRegistry::registerAutoloader(new ClassLoaderWrapper($composerAutoloader));
+
 $autoloadWrapper = \Magento\Framework\Autoload\AutoloaderRegistry::getAutoloader();
 //$autoloadWrapper->addPsr4(
 //    'Magento\\',
@@ -23,12 +28,12 @@ $autoloadWrapper = \Magento\Framework\Autoload\AutoloaderRegistry::getAutoloader
 //        $testsBaseDir . '/framework/tests/unit/testsuite/Magento',
 //    ]
 //);
-$autoloadWrapper->addPsr4(
-    'Magento\\TestFramework\\',
-    [
-        $testsBaseDir . '/framework/Magento/TestFramework/'
-    ]
-);
+//$autoloadWrapper->addPsr4(
+//    'Magento\\TestFramework\\',
+//    [
+//        $testsBaseDir . '/framework/Magento/TestFramework/'
+//    ]
+//);
 //$autoloadWrapper->addPsr4('Magento\\CodeMessDetector\\', $testsBaseDir . '/framework/Magento/CodeMessDetector');
 
 //$generatedCode = DirectoryList::getDefaultConfig()[DirectoryList::GENERATED_CODE][DirectoryList::PATH];

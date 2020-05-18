@@ -20,6 +20,11 @@
     "phpunit/phpunit": "~6.5.0",
     "phpmd/phpmd": "@stable"
   },
+  "autoload": {
+    "psr-4": {
+      "Magento\\TestFramework\\Integrity\\": "static/framework/Magento/TestFramework/Integrity/"
+    }
+  },
   "authors": [
     {
       "name": "Alexander Lukyanov",
@@ -29,4 +34,4 @@
   "require-dev": {
   },
   "bin": ["bin/phpunit-tests"]
-}
+},
