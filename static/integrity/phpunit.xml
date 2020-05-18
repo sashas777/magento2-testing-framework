@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ @author     The S Group <support@sashas.org>
+  ~ @copyright  2020  Sashas IT Support Inc. (https://www.sashas.org)
+  ~ @license     http://opensource.org/licenses/GPL-3.0  GNU General Public License, version 3 (GPL-3.0)
+  -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/6.2/phpunit.xsd"
+         colors="false"
+         columns="max"
+         beStrictAboutTestsThatDoNotTestAnything="false"
+         bootstrap="../bootstrap.php">
+    <testsuites>
+        <testsuite name="Code Integrity Tests">
+            <directory>testsuite/Magento/Test/Integrity</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <ini name="date.timezone" value="America/New_York"/>
+        <!-- TESTCODESTYLE_IS_FULL_SCAN - specify if full scan should be performed for test code style test -->
+        <const name="TESTCODESTYLE_IS_FULL_SCAN" value="0"/>
+        <!-- TESTS_COMPOSER_PATH - specify the path to composer binary, if a relative reference cannot be resolved -->
+        <!--<const name="TESTS_COMPOSER_PATH" value="/usr/local/bin/composer"/>-->
+    </php>
+</phpunit>

@@ -1,4 +1,6 @@
 # Magento 2 Testing Framework
+[![Latest Stable Version](https://poser.pugx.org/thesgroup/magento2-testing-framework/v)](//packagist.org/packages/thesgroup/magento2-testing-framework) [![Total Downloads](https://poser.pugx.org/thesgroup/magento2-testing-framework/downloads)](//packagist.org/packages/thesgroup/magento2-testing-framework) [![Latest Unstable Version](https://poser.pugx.org/thesgroup/magento2-testing-framework/v/unstable)](//packagist.org/packages/thesgroup/magento2-testing-framework) [![License](https://poser.pugx.org/thesgroup/magento2-testing-framework/license)](//packagist.org/packages/thesgroup/magento2-testing-framework)
+
 Magento 2 static/unit testing framework for single modules tests
 
 ## Installation
@@ -14,51 +16,56 @@ composer require --dev thesgroup/magento2-testing-framework
 - [Magento Code Standard](https://github.com/magento/magento-coding-standard)
 - [MFTF](https://github.com/magento/magento2-functional-testing-framework)
 
-## PHPCS
+### Tests
+
+#### PHPCS
+Run PHP code style validation
 
 ```bash
 vendor/bin/phpcs --config-set installed_paths vendor/magento/magento-coding-standard/
 vendor/bin/phpcs --ignore=*/vendor/*,*/Test/*  --standard=Magento2 .
 ```
-Run PHP code style validation
 
-## PHPMD
+#### PHPMD
+Run PHP mess detector validation
 
 ```bash
 vendor/bin/phpmd . ansi vendor/thesgroup/magento2-testing-framework/static/phpmd/ruleset.xml --exclude vendor/,Test/
 ```
 
-Run PHP mess detector validation
-
-### Magento Specific Rules
-#### AllPurposeAction
+##### Magento Specific Rules
+###### AllPurposeAction
 Controllers (classes implementing ActionInterface) have to implement marker Http<Method>ActionInterface
 to restrict incoming requests by methods.
 
-#### CookieAndSessionMisuse
+###### CookieAndSessionMisuse
 Sessions and cookies must only be used in classes directly responsible for HTML presentation because Web APIs do not
 rely on cookies and sessions. If you need to get current user use Magento\Authorization\Model\UserContextInterface
 
-#### FinalImplementation
+###### FinalImplementation
 Final keyword is prohibited in Magento as this decreases extensibility and customizability.
 Final classes and method are not compatible with plugins and proxies.
 
-## PHPUnit
+#### PHPUnit
+Run unit tests and check for code coverage threshold.
 
 ```bash
 vendor/bin/phpunit-tests
 ```
-Run unit tests and check for code coverage treshold.
+ 
 After execution following reports generated:
 - JUnit log test-reports/junit.xml
 - Html test coverage report test-coverage-html/
 - Clover test coverage report clover.xml
 
 ### Environment Variables
-Variable | Description
------------- | -------------
-TESTS_TEMP_DIR | Temporary directory for generated classes
-UNIT_COVERAGE_THRESHOLD | Code coverage treshold
+Variable | Description | Default Value
+------------ | -------------| -------------
+TESTS_TEMP_DIR | Temporary directory for generated classes | ./tmp
+UNIT_COVERAGE_THRESHOLD | Code coverage threshold | 70%
 
 ## Contribute to this module
-Feel free to Fork and contrinute to this module and create a pull request so we will merge your changes to master branch.
+Feel free to Fork and contribute to this module and create a pull request so we will merge your changes to master branch.
+
+## Credits
+Thanks the [the contributors](https://github.com/sashas777/magento2-testing-framework/graphs/contributors)
