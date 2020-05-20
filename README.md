@@ -58,6 +58,40 @@ After execution following reports generated:
 - Html test coverage report test-coverage-html/
 - Clover test coverage report clover.xml
 
+### Integrity Tests
+ 
+```bash
+vendor/bin/phpunit -c vendor/thesgroup/magento2-testing-framework/static/integrity/phpunit.xml 
+```
+The command above will perform following tests:
+
+#### DI Compiler Test
+Compiler test. Check compilation of DI definitions and code generation
+
+#### Layout Tests
+- Test block names exists
+- Test layout declaration and usage of block elements
+- Test format of layout files
+- Test layout declaration and usage of block elements
+- Test declarations of handles in theme layout updates
+
+#### Magento Tests
+- Test ACL in the admin area by various assertions.
+- Find adminhtml/system.xml files and validate them.
+- Find fieldset.xml files and validate them.
+- Check interfaces inherited from \Magento\Framework\Api\ExtensibleDataInterface.
+- Find webapi xml files and validate them.
+- Find widget.xml files and validate them.
+
+#### Phrase Tests
+- Scan source code for detects invocations of outdated __() method.
+- Scan source code for detects invocations of __() function or Phrase object, analyzes placeholders with arguments and see if they not equal.
+- Will check if phrase is empty.
+
+#### XML Tests
+- xsi:noNamespaceSchemaLocation validation.
+- XML DOM Validation.
+
 ### Environment Variables
 Variable | Description | Default Value
 ------------ | -------------| -------------

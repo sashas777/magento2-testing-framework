@@ -12,7 +12,7 @@
          bootstrap="../bootstrap.php">
     <testsuites>
         <testsuite name="Code Integrity Tests">
-            <directory>testsuite/Magento/Test/Integrity</directory>
+            <directory suffix="Test.php">testsuite/Magento/Test/Integrity</directory>
         </testsuite>
     </testsuites>
     <php>

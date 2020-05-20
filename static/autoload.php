@@ -5,21 +5,24 @@
  * @license     http://opensource.org/licenses/GPL-3.0  GNU General Public License, version 3 (GPL-3.0)
  */
 
-use \Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\Autoload\AutoloaderRegistry;
+use Magento\Framework\Autoload\ClassLoaderWrapper;
 
 //phpcs:ignore Magento2.Functions.DiscouragedFunction
-define('BP', dirname(__DIR__ . '/../../../../'));
-$baseDir = realpath(__DIR__ . '/../../../../');
+define('BP', realpath(__DIR__ . '/../../../../'));
+//$baseDir = realpath(__DIR__ . '/../../../../');
 // phpcs:ignore Magento2.Security.IncludeFile.FoundIncludeFile
-require $baseDir . '/vendor/autoload.php';
+require_once __DIR__ . '/../../../autoload.php';
 // phpcs:ignore Magento2.Security.IncludeFile.FoundIncludeFile
-require $baseDir . '/vendor/squizlabs/php_codesniffer/autoload.php';
-$testsBaseDir = __DIR__ . '/static';
+//require __DIR__ . '/../../../squizlabs/php_codesniffer/autoload.php';
+//$testsBaseDir = __DIR__ . '/static';
 
-$composerAutoloader = include $baseDir . '/vendor/autoload.php';
+
+$composerAutoloader = include __DIR__ . '/../../../autoload.php';
 AutoloaderRegistry::registerAutoloader(new ClassLoaderWrapper($composerAutoloader));
 
-$autoloadWrapper = \Magento\Framework\Autoload\AutoloaderRegistry::getAutoloader();
+$autoloadWrapper = AutoloaderRegistry::getAutoloader();
 //$autoloadWrapper->addPsr4(
 //    'Magento\\',
 //    [
