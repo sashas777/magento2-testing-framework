@@ -8,6 +8,8 @@
 /**
  * Abstract class for phrase testing
  */
+declare(strict_types=1);
+
 namespace Magento\TestFramework\Integrity;
 
 use Magento\Framework\Component\ComponentRegistrar;

@@ -82,6 +82,11 @@ Compiler test. Check compilation of DI definitions and code generation
 - Check interfaces inherited from \Magento\Framework\Api\ExtensibleDataInterface.
 - Find webapi xml files and validate them.
 - Find widget.xml files and validate them.
+- Scan source code for references to classes and see if they indeed exist.
+- A test that enforces validity of composer.json files and any other conventions in Magento components.
+- Validates information on the dependency between the modules according to the declarative schema.
+- Oberver Implementation. (PAY ATTENTION: Current implementation does not support of virtual types)
+- Scan source code for incorrect or undeclared modules dependencies.
 
 #### Phrase Tests
 - Scan source code for detects invocations of outdated __() method.
