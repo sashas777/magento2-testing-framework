@@ -10,11 +10,12 @@ To use within your Magento 2 project you can use:
 composer require --dev thesgroup/magento2-testing-framework
 ```
 
-## Related Repositories
+## Related Information
 - [Docker Images](https://github.com/sashas777/magento-docker/)
 - [Examples for pipeline configuration](https://github.com/sashas777/magento-docker-pipelines)
 - [Magento Code Standard](https://github.com/magento/magento-coding-standard)
 - [MFTF](https://github.com/magento/magento2-functional-testing-framework)
+- [Magento Coding Standard Severity](https://github.com/magento/magento-coding-standard/blob/v5/Magento2/ruleset.xml)
 
 ### Tests
 
@@ -22,15 +23,24 @@ composer require --dev thesgroup/magento2-testing-framework
 Run PHP code style validation
 
 ```bash
-vendor/bin/phpcs --config-set installed_paths vendor/magento/magento-coding-standard/
-vendor/bin/phpcs --ignore=*/vendor/*,*/Test/*  --standard=Magento2 .
+vendor/bin/phpcs-tests
+```
+By default, PHP_CodeSniffer assigns a severity of 5 to all errors and warnings. PHP_CodeSniffer allows you to decide what the minimum severity level must be to show a message in its report using the `--severity` command line argument.
+To hide errors and warnings with a severity less than 3:
+```bash
+vendor/bin/phpcs-tests 3
 ```
 
+Also you can run phpcbf from the command-line to fix your code:
+```bash
+vendor/bin/phpcbf --standard=Magento2 .
+```
+  
 #### PHPMD
 Run PHP mess detector validation
 
 ```bash
-vendor/bin/phpmd . ansi vendor/thesgroup/magento2-testing-framework/static/phpmd/ruleset.xml --exclude vendor/,Test/
+vendor/bin/phpmd-tests
 ```
 
 ##### Magento Specific Rules
@@ -57,11 +67,21 @@ After execution following reports generated:
 - JUnit log test-reports/junit.xml
 - Html test coverage report test-coverage-html/
 - Clover test coverage report clover.xml
+ 
+To set code coverage threshold 80% (Default 70%):
+```bash
+vendor/bin/phpunit-tests 80
+```
+### Javascript Tests
+Run ESLint to ensure the quality of your JavaScript code:
+```bash
+vendor/bin/js-tests
+```
 
 ### Integrity Tests
  
 ```bash
-vendor/bin/phpunit -c vendor/thesgroup/magento2-testing-framework/static/integrity/phpunit.xml 
+vendor/bin/integrity-tests
 ```
 The command above will perform following tests:
 
@@ -96,12 +116,6 @@ Compiler test. Check compilation of DI definitions and code generation
 #### XML Tests
 - xsi:noNamespaceSchemaLocation validation.
 - XML DOM Validation.
-
-### Environment Variables
-Variable | Description | Default Value
------------- | -------------| -------------
-TESTS_TEMP_DIR | Temporary directory for generated classes | ./tmp
-UNIT_COVERAGE_THRESHOLD | Code coverage threshold | 70%
 
 ## Contribute to this module
 Feel free to Fork and contribute to this module and create a pull request so we will merge your changes to master branch.

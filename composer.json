@@ -23,8 +23,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Magento\\TestFramework\\": "static/integrity/framework/Magento/TestFramework/",
-      "Magento\\Setup\\": "static/integrity/framework/Magento/Setup/"
+      "Magento\\TestFramework\\": "framework/Magento/TestFramework/",
+      "Magento\\Setup\\": "framework/Magento/Setup/"
     }
   },
   "authors": [
@@ -37,6 +37,9 @@
   },
   "bin": [
     "bin/phpunit-tests",
-    "bin/integrity-tests"
+    "bin/integrity-tests",
+    "bin/phpcs-tests",
+    "bin/phpmd-tests",
+    "bin/js-tests"
   ]
 }
