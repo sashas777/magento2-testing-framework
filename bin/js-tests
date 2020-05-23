@@ -1,0 +1,7 @@
+set -e
+
+echo "==============================="
+echo "          ESLint TESTS"
+echo "==============================="
+npm install eslint --save-dev
+npx eslint -c vendor/thesgroup/magento2-testing-framework/static/js/eslint/.eslintrc --ignore-pattern=vendor/** .

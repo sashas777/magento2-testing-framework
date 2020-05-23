@@ -1,5 +1,9 @@
 UNIT_COVERAGE_THRESHOLD=70
 
+if [ "$1" != "" ]; then
+   UNIT_COVERAGE_THRESHOLD=$1
+fi
+
 set -e
 
 echo "==============================="

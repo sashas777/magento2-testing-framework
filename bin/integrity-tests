@@ -1,0 +1,12 @@
+set -e
+
+echo "==============================="
+echo "       COMPOSER VALIDATION"
+echo "==============================="
+composer validate composer.json
+
+echo "==============================="
+echo "          INTEGRITY TESTS"
+echo "==============================="
+vendor/bin/phpunit -c vendor/thesgroup/magento2-testing-framework/static/integrity/phpunit.xml --log-junit test-reports/junit.xml
+

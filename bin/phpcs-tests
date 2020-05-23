@@ -1,0 +1,12 @@
+PHPCS_SEVERITY=1
+
+if [ "$1" != "" ]; then
+   PHPCS_SEVERITY=$1
+fi
+set -e
+
+echo "==============================="
+echo "          CODE STYLE TESTS"
+echo "==============================="
+vendor/bin/phpcs --config-set installed_paths vendor/magento/magento-coding-standard/
+vendor/bin/phpcs --ignore=*/vendor/*,*/Test/*  --severity=$PHPCS_SEVERITY --standard=Magento2 .
