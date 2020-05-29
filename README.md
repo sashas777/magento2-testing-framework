@@ -16,6 +16,7 @@ composer require --dev thesgroup/magento2-testing-framework
 - [Magento Code Standard](https://github.com/magento/magento-coding-standard)
 - [MFTF](https://github.com/magento/magento2-functional-testing-framework)
 - [Magento Coding Standard Severity](https://github.com/magento/magento-coding-standard/blob/v5/Magento2/ruleset.xml)
+- [PHPStan Output Format](https://phpstan.org/user-guide/output-format)
 
 ### Tests
 
@@ -55,6 +56,19 @@ rely on cookies and sessions. If you need to get current user use Magento\Author
 ###### FinalImplementation
 Final keyword is prohibited in Magento as this decreases extensibility and customizability.
 Final classes and method are not compatible with plugins and proxies.
+
+#### PHPStan - PHP Static Analysis Tool
+Run PHPStan static analysis
+
+```bash
+vendor/bin/phpstan-tests
+```
+
+You can specify optional parameters rule level and outpout format:
+
+```bash
+vendor/bin/phpstan-tests 1 table
+```
 
 #### PHPUnit
 Run unit tests and check for code coverage threshold.

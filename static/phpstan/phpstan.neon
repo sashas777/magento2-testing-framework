@@ -1,0 +1,28 @@
+parameters:
+	checkExplicitMixedMissingReturn: true
+	checkPhpDocMissingReturn: true
+	reportUnmatchedIgnoredErrors: false
+	excludes_analyse:
+		- %rootDir%/../../../vendor/*
+		- %rootDir%/../../../Tests/*
+		- %rootDir%/../../../test-coverage-html/*
+		- %rootDir%/../../../test-reports/*
+	autoload_files:
+			- %rootDir%/../../autoload.php
+			- %rootDir%/../../thesgroup/magento2-testing-framework/framework/Magento/PhpStan/autoload.php
+	ignoreErrors:
+	    # Ignore PHPStan\Rules\Classes\UnusedConstructorParametersRule
+		- '#Constructor of class [a-zA-Z0-9\\_]+ has an unused parameter#'
+		# Ignore setCustomErrorHandler function not found in bootstrap files
+		- '#Function setCustomErrorHandler not found#'
+		# Ignore 'return statement is missing' error when 'void' is present in return type list
+		- '#Method (?:.*?) should return (?:.*?)void(?:.*?) but return statement is missing.#'
+
+services:
+    errorFormatter.filtered:
+        class: Magento\PhpStan\Formatters\FilteredErrorFormatter
+        arguments:
+            showTipsOfTheDay: false
+            checkThisOnly: false
+            inferPrivatePropertyTypeFromConstructor: true
+            checkMissingTypehints: %checkMissingTypehints%
