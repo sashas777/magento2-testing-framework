@@ -22,7 +22,7 @@ class SchemaTest extends \PHPUnit\Framework\TestCase
             function ($filename) {
                 $dom = new \DOMDocument();
                 $xmlFile = file_get_contents($filename);
-                $this->assertNotEmpty($xmlFile, $filename. ' - should be empty.');
+                $this->assertNotEmpty($xmlFile, $filename. ' - should not be empty.');
                 $dom->loadXML($xmlFile);
                 $errors = libxml_get_errors();
                 libxml_clear_errors();

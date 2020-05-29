@@ -77,6 +77,10 @@ Run ESLint to ensure the quality of your JavaScript code:
 ```bash
 vendor/bin/js-tests
 ```
+Fix ESLint Locally (You should have eslint installed):
+```bash
+npx eslint -c vendor/thesgroup/magento2-testing-framework/static/js/eslint/.eslintrc --ignore-pattern=vendor/** . --fix
+```
 
 ### Integrity Tests
  
