@@ -1,6 +1,7 @@
 {
   // http://eslint.org/docs/rules/
 
+  "parserOptions": { "ecmaVersion": 6 },
   "ecmaFeatures": {
     "binaryLiterals": false,                    // enable binary literals
     "blockBindings": false,                     // enable let and const (aka block bindings)
