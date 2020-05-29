@@ -10,7 +10,7 @@ To use within your Magento 2 project you can use:
 composer require --dev thesgroup/magento2-testing-framework
 ```
 
-## Related Information
+## Related Resources
 - [Docker Images](https://github.com/sashas777/magento-docker/)
 - [Examples for pipeline configuration](https://github.com/sashas777/magento-docker-pipelines)
 - [Magento Code Standard](https://github.com/magento/magento-coding-standard)
