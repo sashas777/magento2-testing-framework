@@ -156,9 +156,12 @@ class DeclarativeSchemaDependencyProvider
             $jsonFiles = Files::init()->getComposerFiles(ComponentRegistrar::MODULE, false);
 
             foreach ($jsonFiles as $file) {
+                if (strpos($file, '/dev/tests/')) {
+                    continue;
+                }
                 $json = new \Magento\Framework\Config\Composer\Package($this->readJsonFile($file));
                 //sashas
-                if (!$json->get('name')) {
+                if (!$json->get('name') || !is_string($json->get('name'))) {
                     continue;
                 }
                 $moduleName = $this->convertModuleName($json->get('name'));
@@ -657,6 +660,7 @@ class DeclarativeSchemaDependencyProvider
         string $type
     ): void {
         $packageNames = array_filter($packageNames, function ($packageName) {
+            $packageName = (string) $packageName;
             return $this->getModuleName($packageName) ||
                    0 === strpos($packageName, 'magento/') && 'magento/magento-composer-installer' != $packageName;
         });
@@ -685,8 +689,14 @@ class DeclarativeSchemaDependencyProvider
             $packageModuleMapping = [];
             foreach ($jsonFiles as $file) {
                 //sashas
+                if (strpos($file, 'magento2-base/dev/tests/')) {
+                    continue;
+                }
                 $json = new \Magento\Framework\Config\Composer\Package($this->readJsonFile($file));
                 if (!in_array($json->get('type'), ['magento2-module'])) {
+                    continue;
+                }
+                if (!file_exists(dirname($file) . '/etc/module.xml')) {
                     continue;
                 }
                 $moduleXml = simplexml_load_file(dirname($file) . '/etc/module.xml');
