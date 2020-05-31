@@ -837,6 +837,9 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
 
         $packageModuleMapping = [];
         foreach ($jsonFiles as $file) {
+            if (strpos($file, '/dev/tests/')) {
+                continue;
+            }
             $contents = file_get_contents($file);
             $composerJson = json_decode($contents);
             if (null == $composerJson) {
