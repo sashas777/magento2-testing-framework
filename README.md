@@ -10,12 +10,13 @@ To use within your Magento 2 project you can use:
 composer require --dev thesgroup/magento2-testing-framework
 ```
 
-## Related Information
+## Related Resources
 - [Docker Images](https://github.com/sashas777/magento-docker/)
 - [Examples for pipeline configuration](https://github.com/sashas777/magento-docker-pipelines)
 - [Magento Code Standard](https://github.com/magento/magento-coding-standard)
 - [MFTF](https://github.com/magento/magento2-functional-testing-framework)
 - [Magento Coding Standard Severity](https://github.com/magento/magento-coding-standard/blob/v5/Magento2/ruleset.xml)
+- [PHPStan Output Format](https://phpstan.org/user-guide/output-format)
 
 ### Tests
 
@@ -56,6 +57,19 @@ rely on cookies and sessions. If you need to get current user use Magento\Author
 Final keyword is prohibited in Magento as this decreases extensibility and customizability.
 Final classes and method are not compatible with plugins and proxies.
 
+#### PHPStan - PHP Static Analysis Tool
+Run PHPStan static analysis
+
+```bash
+vendor/bin/phpstan-tests
+```
+
+You can specify optional parameters rule level and outpout format:
+
+```bash
+vendor/bin/phpstan-tests 1 table
+```
+
 #### PHPUnit
 Run unit tests and check for code coverage threshold.
 
@@ -76,6 +90,10 @@ vendor/bin/phpunit-tests 80
 Run ESLint to ensure the quality of your JavaScript code:
 ```bash
 vendor/bin/js-tests
+```
+Fix ESLint Locally (You should have eslint installed):
+```bash
+npx eslint -c vendor/thesgroup/magento2-testing-framework/static/js/eslint/.eslintrc --ignore-pattern=vendor/** . --fix
 ```
 
 ### Integrity Tests

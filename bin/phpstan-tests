@@ -1,0 +1,18 @@
+RULE_LEVEL=0
+ERROR_FORMAT=table
+
+if [ "$1" != "" ]; then
+   RULE_LEVEL=$1
+fi
+
+if [ "$2" != "" ]; then
+   ERROR_FORMAT=$2
+fi
+
+set -e
+
+echo "==============================="
+echo "          PHPStan TESTS"
+echo "==============================="
+#https://phpstan.org/user-guide/output-format
+vendor/bin/phpstan analyse -l $RULE_LEVEL --error-format=$ERROR_FORMAT -c vendor/thesgroup/magento2-testing-framework/static/phpstan/phpstan.neon --no-ansi --no-progress .

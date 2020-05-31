@@ -5,7 +5,7 @@
   "type": "library",
   "license": ["GPL-3.0"],
   "keywords": ["magento", "automation", "magento2-library", "testing"],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "repositories": [
     {
       "type": "composer",
@@ -19,12 +19,14 @@
     "magento/magento-coding-standard": "^5.0",
     "rregeer/phpunit-coverage-check": "*",
     "phpunit/phpunit": "~6.5.0",
+    "phpstan/phpstan": ">=0.12.3 <=0.12.23",
     "phpmd/phpmd": "@stable"
   },
   "autoload": {
     "psr-4": {
       "Magento\\TestFramework\\": "framework/Magento/TestFramework/",
-      "Magento\\Setup\\": "framework/Magento/Setup/"
+      "Magento\\Setup\\": "framework/Magento/Setup/",
+      "Magento\\PhpStan\\": "framework/Magento/PhpStan/"
     }
   },
   "authors": [
@@ -40,6 +42,7 @@
     "bin/integrity-tests",
     "bin/phpcs-tests",
     "bin/phpmd-tests",
-    "bin/js-tests"
+    "bin/js-tests",
+    "bin/phpstan-tests"
   ]
 }

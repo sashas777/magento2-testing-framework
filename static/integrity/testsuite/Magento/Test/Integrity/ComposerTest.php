@@ -76,21 +76,21 @@ class ComposerTest extends \PHPUnit\Framework\TestCase
                 $this->assertDependsOnPhp($json->require);
                 $this->assertDependsOnFramework($json->require);
                 $this->assertAutoload($json);
-                $this->assertVersionSpecified($json);
+                $this->assertVersionNotSpecified($json);
                 break;
             case 'magento2-language':
                 $this->assertDependsOnFramework($json->require);
-                $this->assertVersionSpecified($json);
+                $this->assertVersionNotSpecified($json);
                 break;
             case 'magento2-theme':
                 $this->assertDependsOnPhp($json->require);
                 $this->assertDependsOnFramework($json->require);
-                $this->assertVersionSpecified($json);
+                $this->assertVersionNotSpecified($json);
                 break;
             case 'magento2-library':
                 $this->assertDependsOnPhp($json->require);
                 $this->assertAutoload($json);
-                $this->assertVersionSpecified($json);
+                $this->assertVersionNotSpecified($json);
                 break;
             default:
                 throw new \InvalidArgumentException("Unknown package type {$packageType}");
@@ -102,10 +102,10 @@ class ComposerTest extends \PHPUnit\Framework\TestCase
      *
      * @param \StdClass $json
      */
-    private function assertVersionSpecified(\StdClass $json)
+    private function assertVersionNotSpecified(\StdClass $json)
     {
-        $errorMessage = 'Version must be specified in the root and package composer JSON files';
-        $this->assertObjectHasAttribute('version', $json, $errorMessage);
+        $errorMessage = 'Version must not be specified in the root and package composer JSON files';
+        $this->assertObjectNotHasAttribute('version', $json, $errorMessage);
     }
 
     /**
