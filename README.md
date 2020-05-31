@@ -10,13 +10,13 @@ To use within your Magento 2 project you can use:
 composer require --dev thesgroup/magento2-testing-framework
 ```
 
-## Related Resources
-- [Docker Images](https://github.com/sashas777/magento-docker/)
-- [Examples for pipeline configuration](https://github.com/sashas777/magento-docker-pipelines)
-- [Magento Code Standard](https://github.com/magento/magento-coding-standard)
-- [MFTF](https://github.com/magento/magento2-functional-testing-framework)
-- [Magento Coding Standard Severity](https://github.com/magento/magento-coding-standard/blob/v5/Magento2/ruleset.xml)
-- [PHPStan Output Format](https://phpstan.org/user-guide/output-format)
+## Summary
+- [PHPCS](https://github.com/sashas777/magento2-testing-framework#phpcs)
+- [PHPMD](https://github.com/sashas777/magento2-testing-framework#phpmd)
+- [PHPStan](https://github.com/sashas777/magento2-testing-framework#phpstan---php-static-analysis-tool)
+- [PHPUnit](https://github.com/sashas777/magento2-testing-framework#phpunit)
+- [Javascript Tests](https://github.com/sashas777/magento2-testing-framework#javascript-tests)
+- [Integrity Tests](https://github.com/sashas777/magento2-testing-framework#integrity-tests)
 
 ### Tests
 
@@ -140,3 +140,11 @@ Feel free to Fork and contribute to this module and create a pull request so we 
 
 ## Credits
 Thanks the [the contributors](https://github.com/sashas777/magento2-testing-framework/graphs/contributors)
+
+## Related Resources
+- [Docker Images](https://github.com/sashas777/magento-docker/)
+- [Examples for pipeline configuration](https://github.com/sashas777/magento-docker-pipelines)
+- [Magento Code Standard](https://github.com/magento/magento-coding-standard)
+- [MFTF](https://github.com/magento/magento2-functional-testing-framework)
+- [Magento Coding Standard Severity](https://github.com/magento/magento-coding-standard/blob/v5/Magento2/ruleset.xml)
+- [PHPStan Output Format](https://phpstan.org/user-guide/output-format)
