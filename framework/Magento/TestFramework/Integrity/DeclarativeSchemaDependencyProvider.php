@@ -261,6 +261,7 @@ class DeclarativeSchemaDependencyProvider
             }
             $moduleName = array_key_first($json['autoload']['psr-4']);
             $moduleName = str_replace('/', '\\', $moduleName);
+            $moduleName = rtrim($moduleName, '\\');
             //sashas
             $moduleDeclaration = $this->getDbSchemaDeclaration($filePath);
 
