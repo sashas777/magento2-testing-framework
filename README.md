@@ -18,7 +18,7 @@ composer require --dev thesgroup/magento2-testing-framework
 - [Javascript Tests](https://github.com/sashas777/magento2-testing-framework#javascript-tests)
 - [Integrity Tests](https://github.com/sashas777/magento2-testing-framework#integrity-tests)
 
-### Tests
+## Tests
 
 #### PHPCS
 Run PHP code style validation
