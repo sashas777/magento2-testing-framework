@@ -285,12 +285,18 @@ class ClassesTest extends \PHPUnit\Framework\TestCase
      */
     private function assertClassNamespace(string $file, string $relativePath, string $contents, string $className): void
     {
-        $namespacePattern = '/(Magento|Zend)\/[a-zA-Z]+[^\.]+/';
+        $namespacePattern = '/[a-zA-Z]+[^\.]+\/[a-zA-Z]+[^\.]+/';
+        $unitTestPattern = '/(tests|test)\/[a-zA-Z]+[^\.]+/';
         $formalPattern = '/^namespace\s[a-zA-Z]+(\\\\[a-zA-Z0-9]+)*/m';
 
         $namespaceMatch = [];
         $formalNamespaceArray = [];
         $namespaceFolders = null;
+
+        //  skip unit tests
+        if (preg_match($unitTestPattern, $relativePath, $namespaceMatch) == 0) {
+            return;
+        }
 
         // if no namespace pattern found according to the path of the file, skip the file
         if (preg_match($namespacePattern, $relativePath, $namespaceMatch) == 0) {
@@ -299,18 +305,26 @@ class ClassesTest extends \PHPUnit\Framework\TestCase
 
         $namespaceFolders = $namespaceMatch[0];
         $classParts = explode('/', $namespaceFolders);
-        array_pop($classParts);
+        //sashas
+        $composerFile = BP . '/composer.json';
+        $composerContent = file_get_contents($composerFile);
+        $composerJson = json_decode($composerContent, true);
+        $classParts = array_merge(explode('\\', rtrim(array_key_first($composerJson['autoload']['psr-4']), '\\')), $classParts);
+
+//        array_pop($classParts);
         $expectedNamespace = implode('\\', $classParts);
+        $expectedNamespace = str_replace('\\', '/', $expectedNamespace);
 
         if (preg_match($formalPattern, $contents, $formalNamespaceArray) != 0) {
             $foundNamespace = substr($formalNamespaceArray[0], 10);
             $foundNamespace = str_replace('\\', '/', $foundNamespace);
             $foundNamespace .= '/' . $className;
+
             if ($namespaceFolders != null && $foundNamespace != null) {
                 $this->assertEquals(
-                    $namespaceFolders,
+                    $expectedNamespace,
                     $foundNamespace,
-                    "Location of {$file} does not match formal namespace: {$expectedNamespace}\n"
+                    "Location of {$file} does not match formal namespace: {$expectedNamespace} found {$foundNamespace}\n"
                 );
             }
         } else {
