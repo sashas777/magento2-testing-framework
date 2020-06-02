@@ -64,7 +64,8 @@ class ControllerAclTest extends \PHPUnit\Framework\TestCase
             $this->whiteListedBackendControllers[$item] = 1;
         }
         $rootJson = json_decode(file_get_contents(BP . '/composer.json'), true);
-        $this->moduleNameSpace = array_key_first($rootJson['autoload']['psr-4']);
+        $psr4Name = array_keys($rootJson['autoload']['psr-4']);
+        $this->moduleNameSpace =  $psr4Name[0];
     }
 
     /**
