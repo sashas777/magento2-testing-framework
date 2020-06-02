@@ -21,6 +21,9 @@ class SchemaTest extends \PHPUnit\Framework\TestCase
              */
             function ($filename) {
                 $dom = new \DOMDocument();
+                if (strpos($filename, 'phpunit.xml')) {
+                    return;
+                }
                 $xmlFile = file_get_contents($filename);
                 $this->assertNotEmpty($xmlFile, $filename. ' - should not be empty.');
                 $dom->loadXML($xmlFile);
