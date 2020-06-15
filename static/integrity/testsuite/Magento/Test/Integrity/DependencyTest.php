@@ -263,7 +263,7 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
     private static function getRoutesWhitelist(): array
     {
         if (is_null(self::$routesWhitelist)) {
-            $routesWhitelistFilePattern = realpath(__DIR__) . '/_files/dependency_test/whitelist/routes_*.php';
+            $routesWhitelistFilePattern = BP . '/Test/_files/dependency_test/whitelist/routes_*.php';
             $routesWhitelist = [];
             foreach (glob($routesWhitelistFilePattern) as $fileName) {
                 //phpcs:ignore Magento2.Performance.ForeachArrayMerge
