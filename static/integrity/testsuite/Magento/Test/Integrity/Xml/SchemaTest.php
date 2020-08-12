@@ -27,6 +27,9 @@ class SchemaTest extends \PHPUnit\Framework\TestCase
                 if (strpos($filename, 'csp_whitelist.xml')) {
                     return;
                 }
+                if (strpos($filename, 'clover.xml')) {
+                    return;
+                }
                 $xmlFile = file_get_contents($filename);
                 $this->assertNotEmpty($xmlFile, $filename. ' - should not be empty.');
                 $dom->loadXML($xmlFile);
