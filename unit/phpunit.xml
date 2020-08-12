@@ -5,7 +5,7 @@
   ~ @license     http://opensource.org/licenses/GPL-3.0  GNU General Public License, version 3 (GPL-3.0)
   -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/6.2/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/9.1/phpunit.xsd"
          colors="false"
          columns="max"
          beStrictAboutTestsThatDoNotTestAnything="true"
