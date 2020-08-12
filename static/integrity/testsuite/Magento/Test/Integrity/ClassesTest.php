@@ -43,7 +43,7 @@ class ClassesTest extends \PHPUnit\Framework\TestCase
     /**
      * Set Up
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->componentRegistrar = new ComponentRegistrar();
     }
