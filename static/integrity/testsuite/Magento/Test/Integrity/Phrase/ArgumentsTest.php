@@ -22,7 +22,7 @@ class ArgumentsTest extends AbstractPhraseTestCase
      */
     protected $_phraseCollector;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->_phraseCollector = new \Magento\Setup\Module\I18n\Parser\Adapter\Php\Tokenizer\PhraseCollector(
             new \Magento\Setup\Module\I18n\Parser\Adapter\Php\Tokenizer(),
