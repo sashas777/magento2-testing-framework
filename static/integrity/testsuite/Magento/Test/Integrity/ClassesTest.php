@@ -18,7 +18,7 @@ use Magento\Framework\App\Utility\Files;
  */
 class ClassesTest extends \PHPUnit\Framework\TestCase
 {
-    /**
+    /**setUpBeforeClass
      * @var ComponentRegistrar
      */
     private $componentRegistrar;
