@@ -24,6 +24,12 @@ class SchemaTest extends \PHPUnit\Framework\TestCase
                 if (strpos($filename, 'phpunit.xml')) {
                     return;
                 }
+                if (strpos($filename, 'csp_whitelist.xml')) {
+                    return;
+                }
+                if (strpos($filename, 'clover.xml')) {
+                    return;
+                }
                 $xmlFile = file_get_contents($filename);
                 $this->assertNotEmpty($xmlFile, $filename. ' - should not be empty.');
                 $dom->loadXML($xmlFile);
@@ -84,6 +90,7 @@ class SchemaTest extends \PHPUnit\Framework\TestCase
     {
         $list = [
             '#etc/countries.xml$#',
+            '#etc/csp_whitelist.xml$#',
             '#conf/schema.xml$#',
             '#layout/swagger_index_index.xml$#',
             '#Doc/etc/doc/vars.xml$#',
