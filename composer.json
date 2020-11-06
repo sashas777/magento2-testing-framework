@@ -18,7 +18,7 @@
     "magento/magento-coding-standard": "^5.0",
     "rregeer/phpunit-coverage-check": "*",
     "phpunit/phpunit": "~6.5.0||^9",
-    "phpstan/phpstan": ">=0.12.3 <=0.12.23",
+    "phpstan/phpstan": "~0.12.23",
     "phpmd/phpmd": "@stable"
   },
   "autoload": {
