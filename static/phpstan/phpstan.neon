@@ -19,7 +19,7 @@ parameters:
 		# Ignore 'return statement is missing' error when 'void' is present in return type list
 		- '#Method (?:.*?) should return (?:.*?)void(?:.*?) but return statement is missing.#'
 		# Ignore Factory class typehint error
-		- '#Parameter (.*?) has invalid typehint type (*?)Factory\.$#'		
+		- '#Parameter (.*?) has invalid typehint type (.*?)Factory\.$#'		
 
 #services:
 #    errorFormatter.filtered:
