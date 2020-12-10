@@ -840,20 +840,32 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
             if (strpos($file, '/dev/tests/')) {
                 continue;
             }
+            if (strpos($file, '/Test/Unit/')) {
+                continue;
+            }
             $contents = file_get_contents($file);
-            $composerJson = json_decode($contents);
+            $composerJson = json_decode($contents, true);
             if (null == $composerJson) {
                 //phpcs:ignore Magento2.Exceptions.DirectThrow
                 throw new \Exception("Invalid Json: $file");
             }
+
             //sashas
-            if (!isset($composerJson->type) || !in_array($composerJson->type, ['magento2-module'])) {
+            if (!isset($composerJson['type']) || !in_array($composerJson['type'], ['magento2-module'])) {
                 continue;
             }
             //sashas
-            $moduleXml = simplexml_load_file(dirname($file) . '/etc/module.xml');
+            $moduleConfigFile = dirname($file) . 'etc/module.xml';
+            if (!file_exists($moduleConfigFile) && isset($composerJson['autoload']) && isset($composerJson['autoload']['psr-4']) ) {
+                $moduleConfigFile = dirname($file) .'/'. array_shift($composerJson['autoload']['psr-4']). '/etc/module.xml';
+                //in case psr4 used
+            }
+            if (!file_exists($moduleConfigFile)) {
+                continue;
+            }
+            $moduleXml = simplexml_load_file($moduleConfigFile);
             $moduleName = str_replace('_', '\\', (string)$moduleXml->module->attributes()->name);
-            $packageName = $composerJson->name;
+            $packageName = $composerJson['name'];
             $packageModuleMapping[$packageName] = $moduleName;
         }
 
