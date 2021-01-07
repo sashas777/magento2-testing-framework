@@ -521,6 +521,10 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
                 $schemaDependencyProvider->getDeclaredExistingModuleDependencies($module)
             );
             $found['Magento\Framework'] = 'Magento\Framework';
+             //sashas
+            if (array_key_exists('Magento\PageBuilder', $declared)) {
+                unset($declared['Magento\PageBuilder']);
+            }
             $this->_setDependencies($module, self::TYPE_HARD, self::MAP_TYPE_REDUNDANT, array_diff($declared, $found));
         }
     }
