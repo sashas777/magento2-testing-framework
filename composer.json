@@ -17,7 +17,7 @@
     "magento/module-webapi": "100.3.*||100.4.*",
     "magento/magento-coding-standard": "^5.0",
     "rregeer/phpunit-coverage-check": "*",
-    "phpunit/phpunit": "~6.5.0||^9",
+    "phpunit/phpunit": "~6.5.0",
     "phpstan/phpstan": "~0.12.23",
     "phpmd/phpmd": "@stable"
   },
