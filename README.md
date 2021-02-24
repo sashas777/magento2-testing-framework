@@ -125,6 +125,11 @@ Compiler test. Check compilation of DI definitions and code generation
 - Validates information on the dependency between the modules according to the declarative schema.
 - Oberver Implementation. (PAY ATTENTION: Current implementation does not support of virtual types)
 - Scan source code for incorrect or undeclared modules dependencies.
+- Check Magento modules structure for circular dependencies
+- Verify whether all payment methods are declared in appropriate modules
+- Tests to find obsolete install/upgrade schema/data scripts.
+- Coverage of obsolete nodes in layout
+- Static test for phtml template files.
 
 #### Phrase Tests
 - Scan source code for detects invocations of outdated __() method.

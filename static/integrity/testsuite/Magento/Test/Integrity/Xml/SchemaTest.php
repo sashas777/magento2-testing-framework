@@ -68,7 +68,8 @@ class SchemaTest extends \PHPUnit\Framework\TestCase
 
     protected function _getFiles($dir, $pattern, $skipDirPattern = '')
     {
-        if (preg_match('/\/Test$/', $dir) || preg_match('/\/vendor$/', $dir) || preg_match('/\/test-reports$/', $dir)) {
+        if (preg_match('/\/Test$/', $dir) || preg_match('/\/vendor$/', $dir)
+            || preg_match('/\/test-reports$/', $dir) || preg_match('/\/node_modules$/', $dir)) {
             return [];
         }
         $files = glob($dir . '/' . $pattern, GLOB_NOSORT);

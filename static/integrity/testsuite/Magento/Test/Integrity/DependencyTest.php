@@ -19,6 +19,8 @@ use Magento\TestFramework\Dependency\ReportsConfigRule;
 use Magento\TestFramework\Dependency\AnalyticsConfigRule;
 use Magento\TestFramework\Dependency\Route\RouteMapper;
 use Magento\TestFramework\Dependency\VirtualType\VirtualTypeMapper;
+use Magento\TestFramework\Integrity\DependencyProvider;
+use \Magento\TestFramework\Integrity\GraphQlSchemaDependencyProvider;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
