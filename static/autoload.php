@@ -15,6 +15,17 @@ define('BP', realpath(__DIR__ . '/../../../../'));
 // phpcs:ignore Magento2.Security.IncludeFile.FoundIncludeFile
 require_once __DIR__ . '/../../../autoload.php';
 // phpcs:ignore Magento2.Security.IncludeFile.FoundIncludeFile
+require BP . '/vendor/squizlabs/php_codesniffer/autoload.php';
 
 $composerAutoloader = include __DIR__ . '/../../../autoload.php';
 AutoloaderRegistry::registerAutoloader(new ClassLoaderWrapper($composerAutoloader));
+
+$testsBaseDir = __DIR__ . '/../..';
+
+$autoloadWrapper = \Magento\Framework\Autoload\AutoloaderRegistry::getAutoloader();
+$autoloadWrapper->addPsr4(
+    'Magento\\',
+    [
+        __DIR__ . '/integrity/testsuite/Magento/',
+    ]
+);

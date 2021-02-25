@@ -14,6 +14,9 @@
         <testsuite name="Code Integrity Tests">
             <directory suffix="Test.php">testsuite/Magento/Test/Integrity</directory>
         </testsuite>
+        <testsuite name="HTML Static Code Analysis">
+            <file>testsuite/Magento/Test/Html/LiveCodeTest.php</file>
+        </testsuite>
     </testsuites>
     <php>
         <ini name="date.timezone" value="America/New_York"/>
