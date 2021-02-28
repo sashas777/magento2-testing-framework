@@ -130,6 +130,8 @@ Compiler test. Check compilation of DI definitions and code generation
 - Tests to find obsolete install/upgrade schema/data scripts.
 - Coverage of obsolete nodes in layout
 - Static test for phtml template files.
+- Less Static Code Analysis
+- GraphQL Static Code Analysis
 
 #### Phrase Tests
 - Scan source code for detects invocations of outdated __() method.

@@ -19,7 +19,8 @@
     "rregeer/phpunit-coverage-check": "*",
     "phpunit/phpunit": "^9",
     "phpstan/phpstan": ">=0.12.3 <=0.12.23",
-    "phpmd/phpmd": "@stable"
+    "phpmd/phpmd": "@stable",
+    "sebastian/phpcpd": "~5.0.0"
   },
   "autoload": {
     "psr-4": {

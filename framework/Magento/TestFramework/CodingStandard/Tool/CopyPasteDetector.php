@@ -98,7 +98,6 @@ class CopyPasteDetector implements ToolInterface, BlacklistInterface
      */
     private function getCommand()
     {
-        $vendorDir = require BP . '/app/etc/vendor_path.php';
-        return 'php ' . BP . '/' . $vendorDir . '/bin/phpcpd';
+        return 'php ' . BP . '/vendor/bin/phpcpd';
     }
 }
