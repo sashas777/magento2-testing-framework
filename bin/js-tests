@@ -5,4 +5,6 @@ echo "          ESLint TESTS"
 echo "==============================="
 npm install eslint --save-dev
 npx eslint -c vendor/thesgroup/magento2-testing-framework/static/js/eslint/.eslintrc --ignore-pattern=vendor/** --no-error-on-unmatched-pattern .
-rm -rf node_modules
+rm -rf node_modules;
+rm -rf  package-lock.json
+rm -rf  package.json

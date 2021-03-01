@@ -1,0 +1,33 @@
+set -e
+
+echo "==============================="
+echo "       COMPOSER VALIDATION"
+echo "==============================="
+composer validate composer.json
+
+echo "==============================="
+echo "          INTEGRITY TESTS"
+echo "==============================="
+vendor/bin/phpunit -c vendor/thesgroup/magento2-testing-framework/static/integrity/phpunit.xml --log-junit test-reports/junit.xml
+
+echo "==============================="
+echo "          ESLint TESTS"
+echo "==============================="
+npm install eslint --save-dev
+npx eslint -c vendor/thesgroup/magento2-testing-framework/static/js/eslint/.eslintrc --ignore-pattern=vendor/** --no-error-on-unmatched-pattern .
+rm -rf node_modules;
+rm -rf  package-lock.json
+rm -rf  package.json
+
+if [[ -z "${UNIT_COVERAGE_THRESHOLD}" ]]; then
+  UNIT_COVERAGE_THRESHOLD=70
+
+echo "==============================="
+echo "          UNIT TESTS"
+echo "==============================="
+vendor/bin/phpunit -c vendor/thesgroup/magento2-testing-framework/unit/phpunit.xml --log-junit test-reports/junit.xml --coverage-html test-coverage-html/ --coverage-clover clover.xml
+
+echo "==============================="
+echo "       UNIT TEST COVERAGE"
+echo "==============================="
+vendor/bin/coverage-check clover.xml $UNIT_COVERAGE_THRESHOLD

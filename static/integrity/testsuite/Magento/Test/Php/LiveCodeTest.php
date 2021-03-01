@@ -295,8 +295,8 @@ class LiveCodeTest extends \PHPUnit\Framework\TestCase
             touch($reportFile);
         }
         $codeSniffer = new CodeSniffer(BP.'/vendor/magento/magento-coding-standard/Magento2', $reportFile, new Wrapper());
-        $fileList = $this->isFullScan() ? $this->getFullWhitelist() : self::getWhitelist(['php', 'phtml']);
-        $ignoreList = Files::init()->readLists(__DIR__ . '/_files/phpcs/ignorelist/*.txt');
+        $fileList = $this->getFullWhitelist();
+        $ignoreList = Files::init()->readLists(BP . '/Test/_files/phpcs/ignorelist/*.txt');
         $ignoreList[] = 'package-lock.json';
         $ignoreList[] = 'node_modules';
         $ignoreList[] = 'package.json';
@@ -330,13 +330,13 @@ class LiveCodeTest extends \PHPUnit\Framework\TestCase
     public function testCodeMess()
     {
         $reportFile = self::$reportDir . '/phpmd_report.txt';
-        $codeMessDetector = new CodeMessDetector(realpath(BP . '/vendor/thesgroup/magento2-testing-framework/static/phpmd/ruleset.xml '), $reportFile);
+        $codeMessDetector = new CodeMessDetector(BP . '/vendor/thesgroup/magento2-testing-framework/static/phpmd/ruleset.xml', $reportFile);
 
         if (!$codeMessDetector->canRun()) {
             $this->markTestSkipped('PHP Mess Detector is not available.');
         }
-        $fileList = self::getWhitelist(['php']);
-        $ignoreList = Files::init()->readLists(__DIR__ . '/_files/phpmd/ignorelist/*.txt');
+        $fileList = $this->getFullWhitelist();
+        $ignoreList = Files::init()->readLists(BP . '/Test/_files/phpmd/ignorelist/*.txt');
         $ignoreList[] = 'package-lock.json';
         $ignoreList[] = 'node_modules';
         $ignoreList[] = 'package.json';
@@ -386,11 +386,17 @@ class LiveCodeTest extends \PHPUnit\Framework\TestCase
         }
 
         $blackList = [];
-        foreach (glob(__DIR__ . '/_files/phpcpd/blacklist/*.txt') as $list) {
+        foreach (glob(BP . '/Test/_files/phpcpd/blacklist/*.txt') as $list) {
             // phpcs:ignore Magento2.Performance.ForeachArrayMerge.ForeachArrayMerge
             $blackList = array_merge($blackList, file($list, FILE_IGNORE_NEW_LINES));
         }
-
+        $blackList[] = 'package-lock.json';
+        $blackList[] = 'node_modules';
+        $blackList[] = 'package.json';
+        $blackList[] = 'composer.lock';
+        $blackList[] = 'vendor';
+        $blackList[] = 'test-reports';
+        $blackList[] = 'Test';
         $copyPasteDetector->setBlackList($blackList);
 
         $result = $copyPasteDetector->run([BP]);
@@ -411,12 +417,19 @@ class LiveCodeTest extends \PHPUnit\Framework\TestCase
      */
     public function testStrictTypes()
     {
-        $changedFiles = self::getAddedFilesList('');
+        $changedFiles = $this->getFullWhitelist();
 
         try {
             $blackList = Files::init()->readLists(
-                self::getBaseFilesFolder() . '/_files/blacklist/strict_type.txt'
+                BP . '/Test/_files/blacklist/strict_type.txt'
             );
+            $blackList[] = 'package-lock.json';
+            $blackList[] = 'node_modules';
+            $blackList[] = 'package.json';
+            $blackList[] = 'composer.lock';
+            $blackList[] = 'vendor';
+            $blackList[] = 'test-reports';
+            $blackList[] = 'Test';
         } catch (\Exception $e) {
             // nothing matched black list
             $blackList = [];
@@ -452,14 +465,21 @@ class LiveCodeTest extends \PHPUnit\Framework\TestCase
     public function testPhpStan()
     {
         $reportFile = self::$reportDir . '/phpstan_report.txt';
-        $confFile = __DIR__ . '/_files/phpstan/phpstan.neon';
+        $confFile = __DIR__ . '/../../../../../phpstan/phpstan.neon';
 
         if (!file_exists($reportFile)) {
             touch($reportFile);
         }
 
-        $fileList = self::getWhitelist(['php']);
-        $blackList = Files::init()->readLists(__DIR__ . '/_files/phpstan/blacklist/*.txt');
+        $fileList =  $this->getFullWhitelist();
+        $blackList = Files::init()->readLists(BP . '/Test/_files/phpstan/blacklist/*.txt');
+        $blackList[] = 'package-lock.json';
+        $blackList[] = 'node_modules';
+        $blackList[] = 'package.json';
+        $blackList[] = 'composer.lock';
+        $blackList[] = 'vendor';
+        $blackList[] = 'test-reports';
+        $blackList[] = 'Test';
         if ($blackList) {
             $blackListPattern = sprintf('#(%s)#i', implode('|', $blackList));
             $fileList = array_filter(
@@ -484,7 +504,7 @@ class LiveCodeTest extends \PHPUnit\Framework\TestCase
      */
     public function testFixtureReuse()
     {
-        $changedFiles =  self::getWhitelist(['php']);
+        $changedFiles =   $this->getFullWhitelist();
         $toBeTestedFiles = self::filterFiles($changedFiles, ['php'], []);
 
         $filesWithIncorrectReuse = [];

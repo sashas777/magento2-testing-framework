@@ -10,38 +10,40 @@ To use within your Magento 2 project you can use:
 composer require --dev thesgroup/magento2-testing-framework
 ```
 
-## Summary
-- [PHPCS](https://github.com/sashas777/magento2-testing-framework#phpcs)
-- [PHPMD](https://github.com/sashas777/magento2-testing-framework#phpmd)
-- [PHPStan](https://github.com/sashas777/magento2-testing-framework#phpstan---php-static-analysis-tool)
-- [PHPUnit](https://github.com/sashas777/magento2-testing-framework#phpunit)
-- [Javascript Tests](https://github.com/sashas777/magento2-testing-framework#javascript-tests)
-- [Integrity Tests](https://github.com/sashas777/magento2-testing-framework#integrity-tests)
-
 ## Tests
-
-#### PHPCS
-Run PHP code style validation
-
+You can run all tests by using the command:
 ```bash
-vendor/bin/phpcs-tests
-```
-By default, PHP_CodeSniffer assigns a severity of 5 to all errors and warnings. PHP_CodeSniffer allows you to decide what the minimum severity level must be to show a message in its report using the `--severity` command line argument.
-To hide errors and warnings with a severity less than 3:
-```bash
-vendor/bin/phpcs-tests 3
+vendor/bin/run-all-tests
 ```
 
-Also you can run phpcbf from the command-line to fix your code:
+### PHP Coding Standard Verification
+These testsuite includes PHPCS PHPMD PHPCPD PHPStan Tests and strict types declaration.
+You can run only them using following command:
 ```bash
+vendor/bin/phpunit --testsuite="PHP Coding Standard Verification" -c vendor/thesgroup/magento2-testing-framework/static/integrity/phpunit.xml
+```
+
+#### PHP Code Style (PHPCS)
+In progress: 
+ - Add ability to specify phpcs severity
+
+Also, you can run phpcbf from the command-line to fix some  issues automatically:
+```bash
+vendor/bin/phpcs --config-set installed_paths vendor/magento/magento-coding-standard/
 vendor/bin/phpcbf --standard=Magento2 .
 ```
-  
-#### PHPMD
-Run PHP mess detector validation
+
+Specific files/folders can be added to blacklist at the module folder by adding <globPattern> at new line
 
 ```bash
-vendor/bin/phpmd-tests
+Test/_files/phpcs/ignorelist/*.txt 
+```
+
+#### PHP Mess Detector (PHPMD) 
+Specific files/folders can be added to blacklist at the module folder by adding <globPattern> at new line
+
+```bash
+Test/_files/phpmd/ignorelist/*.txt
 ```
 
 ##### Magento Specific Rules
@@ -57,63 +59,43 @@ rely on cookies and sessions. If you need to get current user use Magento\Author
 Final keyword is prohibited in Magento as this decreases extensibility and customizability.
 Final classes and method are not compatible with plugins and proxies.
 
-#### PHPStan - PHP Static Analysis Tool
+#### PHP Copy/Paste Detector (PHPMD)
+Specific files/folders can be added to blacklist at the module folder by adding <globPattern> at new line
+
+```bash
+Test/_files/phpcpd/blacklist/*.txt
+```
+
+#### Strict type declarations
+Specific files/folders can be added to blacklist at the module folder by adding <globPattern> at new line
+
+```bash
+Test/_files/blacklist/strict_type.txt
+```
+
+##### PHPStan - PHP Static Analysis Tool
 Run PHPStan static analysis
+Specific files/folders can be added to blacklist at the module folder by adding <globPattern> at new line
 
 ```bash
-vendor/bin/phpstan-tests
+Test/_files/phpstan/blacklist/*.txt
 ```
 
-You can specify optional parameters rule level and outpout format:
+#### Code Integrity Tests
+You can run only them using following command: 
 
 ```bash
-vendor/bin/phpstan-tests 1 table
+vendor/bin/phpunit --testsuite="Code Integrity Tests" -c vendor/thesgroup/magento2-testing-framework/static/integrity/phpunit.xml
 ```
 
-#### PHPUnit
-Run unit tests and check for code coverage threshold.
-
-```bash
-vendor/bin/phpunit-tests
-```
- 
-After execution following reports generated:
-- JUnit log test-reports/junit.xml
-- Html test coverage report test-coverage-html/
-- Clover test coverage report clover.xml
- 
-To set code coverage threshold 80% (Default 70%):
-```bash
-vendor/bin/phpunit-tests 80
-```
-### Javascript Tests
-Run ESLint to ensure the quality of your JavaScript code:
-```bash
-vendor/bin/js-tests
-```
-Fix ESLint Locally (You should have eslint installed):
-```bash
-npx eslint -c vendor/thesgroup/magento2-testing-framework/static/js/eslint/.eslintrc --ignore-pattern=vendor/** . --fix
-```
-
-### Integrity Tests
- 
-```bash
-vendor/bin/integrity-tests
-```
 The command above will perform following tests:
 
-#### DI Compiler Test
-Compiler test. Check compilation of DI definitions and code generation
-
-#### Layout Tests
+- Compiler test. Check compilation of DI definitions and code generation
 - Test block names exists
 - Test layout declaration and usage of block elements
 - Test format of layout files
 - Test layout declaration and usage of block elements
 - Test declarations of handles in theme layout updates
-
-#### Magento Tests
 - Test ACL in the admin area by various assertions.
 - Find adminhtml/system.xml files and validate them.
 - Find fieldset.xml files and validate them.
@@ -132,15 +114,57 @@ Compiler test. Check compilation of DI definitions and code generation
 - Static test for phtml template files.
 - Less Static Code Analysis
 - GraphQL Static Code Analysis
-
-#### Phrase Tests
 - Scan source code for detects invocations of outdated __() method.
 - Scan source code for detects invocations of __() function or Phrase object, analyzes placeholders with arguments and see if they not equal.
 - Will check if phrase is empty.
-
-#### XML Tests
 - xsi:noNamespaceSchemaLocation validation.
 - XML DOM Validation.
+
+#### HTML Static Code Analysis
+You can run only them using following command:
+```bash
+vendor/bin/phpunit --testsuite="HTML Static Code Analysis" -c vendor/thesgroup/magento2-testing-framework/static/integrity/phpunit.xml
+```
+
+#### Less Static Code Analysis
+You can run only them using following command:
+```bash
+vendor/bin/phpunit --testsuite="Less Static Code Analysis" -c vendor/thesgroup/magento2-testing-framework/static/integrity/phpunit.xml
+```
+
+#### GraphQL Static Code Analysis
+You can run only them using following command:
+```bash
+vendor/bin/phpunit --testsuite="GraphQL Static Code Analysis" -c vendor/thesgroup/magento2-testing-framework/static/integrity/phpunit.xml
+```
+
+### PHPUnit
+Run unit tests and check for code coverage threshold.
+
+```bash
+vendor/bin/phpunit-tests
+```
+ 
+After execution following reports generated:
+- JUnit log test-reports/junit.xml
+- Html test coverage report test-coverage-html/
+- Clover test coverage report clover.xml
+ 
+To set code coverage threshold 80% (Default value 70%):
+```bash
+vendor/bin/phpunit-tests 80
+```
+### Javascript Tests
+Run ESLint to ensure the quality of your JavaScript code:
+```bash
+vendor/bin/js-tests
+```
+Fix ESLint Locally:
+```bash
+npm install eslint --save-dev
+npx eslint -c vendor/thesgroup/magento2-testing-framework/static/js/eslint/.eslintrc --ignore-pattern=vendor/** --no-error-on-unmatched-pattern .
+```
+ 
 
 ## Contribute to this module
 Feel free to Fork and contribute to this module and create a pull request so we will merge your changes to master branch.

@@ -102,7 +102,6 @@ class PhpStan implements ToolInterface
     private function getCommand(): string
     {
         // phpcs:ignore Magento2.Security.IncludeFile
-        $vendorDir = require BP . '/app/etc/vendor_path.php';
-        return 'php ' . BP . '/' . $vendorDir . '/bin/phpstan';
+        return 'php ' .BP . '/vendor/bin/phpstan';
     }
 }
