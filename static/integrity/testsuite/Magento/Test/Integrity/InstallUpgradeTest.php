@@ -30,6 +30,10 @@ class InstallUpgradeTest extends \PHPUnit\Framework\TestCase
              * @param string $file
              */
             function ($file) {
+                if (strpos($file, '/vendor/')) {
+                    return;
+                }
+
                 $this->assertStringStartsNotWith(
                     'install-',
                     basename($file),

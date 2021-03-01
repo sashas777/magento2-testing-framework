@@ -24,6 +24,9 @@ class PhtmlTemplateTest extends \PHPUnit\Framework\TestCase
              * @param string $file
              */
             function ($file) {
+                if (strpos($file, '/vendor/')) {
+                    return;
+                }
                 self::assertDoesNotMatchRegularExpression(
                     '/this->(?!helper)\S*/iS',
                     file_get_contents($file),
@@ -51,6 +54,9 @@ class PhtmlTemplateTest extends \PHPUnit\Framework\TestCase
              * @param string $file
              */
             function ($file) {
+                if (strpos($file, '/vendor/')) {
+                    return;
+                }
                 self::assertDoesNotMatchRegularExpression(
                     '/block->_[^_]+\S*\(/iS',
                     file_get_contents($file),
@@ -73,6 +79,9 @@ class PhtmlTemplateTest extends \PHPUnit\Framework\TestCase
              * @param string $file
              */
             function ($file) {
+                if (strpos($file, '/vendor/')) {
+                    return;
+                }
                 self::assertDoesNotMatchRegularExpression(
                     '/type="text\/javascript"/',
                     file_get_contents($file),
@@ -94,6 +103,9 @@ class PhtmlTemplateTest extends \PHPUnit\Framework\TestCase
              * @param string $file
              */
             function ($file) {
+                if (strpos($file, '/vendor/')) {
+                    return;
+                }
                 if (strpos($file, '/view/frontend/templates/') !== false
                     || strpos($file, '/view/base/templates/') !== false
                 ) {
@@ -119,6 +131,9 @@ class PhtmlTemplateTest extends \PHPUnit\Framework\TestCase
              * @param string $file
              */
             function ($file) {
+                if (strpos($file, '/vendor/')) {
+                    return;
+                }
                 $whiteList = $this->getWhiteList();
                 if (!in_array($file, $whiteList, true)
                     && (strpos($file, '/view/frontend/templates/') !== false
@@ -174,6 +189,9 @@ class PhtmlTemplateTest extends \PHPUnit\Framework\TestCase
              * @param string $file
              */
             function ($file) {
+                if (strpos($file, '/vendor/')) {
+                    return;
+                }
                 if (strpos($file, '/view/frontend/templates/') !== false
                     || strpos($file, '/view/base/templates/') !== false
                 ) {
