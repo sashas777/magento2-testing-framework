@@ -76,7 +76,7 @@ class CopyPasteDetector implements ToolInterface, BlacklistInterface
                 continue;
             }
             $ext = pathinfo($file, PATHINFO_EXTENSION);
-            if ($ext != '') {
+            if ($ext != '' && false) { //skip because this option removed in phpcpd 6.0
                 $blacklistedFileNames[] = $file;
             } else {
                 $blacklistedDirs[] = '--exclude ' . $file . ' ';
@@ -84,7 +84,8 @@ class CopyPasteDetector implements ToolInterface, BlacklistInterface
         }
 
         $command = $this->getCommand() . ' --log-pmd ' . escapeshellarg($this->reportFile)
-            . ' --names-exclude ' . join(',', $blacklistedFileNames) . ' --min-lines 13 ' . join(' ', $blacklistedDirs)
+//            . ' --names-exclude ' . join(',', $blacklistedFileNames) 
+            . ' --min-lines 13 ' . join(' ', $blacklistedDirs)
             . ' ' . implode(' ', $whiteList);
         exec($command, $output, $exitCode);
 
