@@ -430,6 +430,7 @@ class LiveCodeTest extends \PHPUnit\Framework\TestCase
             $blackList[] = 'node_modules';
             $blackList[] = 'package.json';
             $blackList[] = 'composer.lock';
+            $blackList[] = 'registration.php';
             $blackList[] = 'vendor';
             $blackList[] = 'test-reports';
             $blackList[] = 'Test';
