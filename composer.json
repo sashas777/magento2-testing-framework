@@ -28,7 +28,10 @@
       "Magento\\Sniffs\\": "framework/Magento/Sniffs/",
       "Magento\\Setup\\": "framework/Magento/Setup/",
       "Magento\\PhpStan\\": "framework/Magento/PhpStan/"
-    }
+    },
+    "classmap": [
+      "src/"
+    ]
   },
   "authors": [
     {

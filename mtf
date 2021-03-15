@@ -1,0 +1,41 @@
+#!/usr/bin/env php
+<?php
+
+if (version_compare('7.3.0', PHP_VERSION, '>')) {
+    fwrite(
+        STDERR,
+        sprintf(
+            'This version of PHPCPD requires PHP 7.3 (or later).' . PHP_EOL .
+            'You are using PHP %s%s.' . PHP_EOL,
+            PHP_VERSION,
+            defined('PHP_BINARY') ? ' (' . PHP_BINARY . ')' : ''
+        )
+    );
+
+    die(1);
+}
+
+define('MTF_PATH', __DIR__);
+define('MODULE_PATH', __DIR__.'/..');
+
+$loaded = false;
+
+foreach (array(MTF_PATH . '/vendor/autoload.php', MODULE_PATH . '/vendor/autoload.php') as $file) {
+    if (file_exists($file)) {
+        require $file;
+        $loaded = true;
+        break;
+    }
+}
+
+if (!$loaded) {
+    die(
+        'You need to set up the project dependencies using the following commands:' . PHP_EOL .
+        'wget http://getcomposer.org/composer.phar' . PHP_EOL .
+        'php composer.phar install' . PHP_EOL
+    );
+}
+
+require_once 'unit/framework/bootstrap-cli.php';
+
+exit((new \TheSGroup\Cli\Application)->run($_SERVER['argv']));

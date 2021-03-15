@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ @author     The S Group <support@sashas.org>
+  ~ @copyright  2021  Sashas IT Support Inc. (https://www.sashas.org)
+  ~ @license     http://opensource.org/licenses/GPL-3.0  GNU General Public License, version 3 (GPL-3.0)
+  -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.2/phpunit.xsd"
+         colors="false"
+         columns="max"
+         beStrictAboutTestsThatDoNotTestAnything="true">
+    <testsuite name="Magento_Unit_Tests">
+        <directory suffix="Test.php">Test/Unit</directory>
+    </testsuite>
+    <php>
+        <ini name="date.timezone" value="America/New_York"/>
+        <ini name="xdebug.max_nesting_level" value="200"/>
+        <ini name="xdebug.mode" value="coverage" />
+        <env name="XDEBUG_MODE" value="coverage" />
+    </php>
+    <coverage includeUncoveredFiles="true"
+              processUncoveredFiles="true"
+              ignoreDeprecatedCodeUnits="true"
+              disableCodeCoverageIgnore="false">
+        <include>
+            <directory suffix=".php">*</directory>
+        </include>
+        <exclude>
+            <directory>Test</directory>
+            <directory>vendor</directory>
+            <directory>Setup</directory>
+            <directory>test-reports</directory>
+        </exclude>
+    </coverage>
+    <listeners>
+        <listener class="Magento\Framework\TestFramework\Unit\Listener\ReplaceObjectManager"/>
+    </listeners>
+</phpunit>
