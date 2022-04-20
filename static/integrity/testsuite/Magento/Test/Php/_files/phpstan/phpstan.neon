@@ -54,4 +54,8 @@ services:
         class: Magento\PhpStan\Formatters\FilteredErrorFormatter
 	autowired: false
         arguments:
+            showTipsOfTheDay: false
+            checkThisOnly: false
+            inferPrivatePropertyTypeFromConstructor: true
+            checkMissingTypehints: %checkMissingTypehints%	
             tableErrorFormatter: @errorFormatter.table
