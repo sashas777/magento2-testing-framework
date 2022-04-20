@@ -36,6 +36,7 @@ services:
 
     errorFormatter.filtered:
         class: Magento\PhpStan\Formatters\FilteredErrorFormatter
+	autowired: false
         arguments:
             showTipsOfTheDay: false
             checkThisOnly: false
