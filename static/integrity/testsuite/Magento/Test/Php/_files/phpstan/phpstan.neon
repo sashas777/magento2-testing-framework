@@ -9,6 +9,11 @@ parameters:
 		- %rootDir%/../../../dev/tests/*/tmp/*
 		- %rootDir%/../../../dev/tests/*/_generated/*
 		- %rootDir%/../../../pub/*
+		- %rootDir%/../../../vendor/*
+		- %rootDir%/../../../Tests/*
+		- %rootDir%/../../../Test/*
+		- %rootDir%/../../../test-coverage-html/*
+		- %rootDir%/../../../test-reports/*
 	autoload_directories:
 		- %rootDir%/../../../dev/tests/static/framework/tests/unit/testsuite/Magento
 		- %rootDir%/../../../dev/tests/integration/framework/tests/unit/testsuite/Magento
@@ -19,6 +24,8 @@ parameters:
 			- %rootDir%/../../../dev/tests/api-functional/framework/autoload.php
 			- %rootDir%/../../../dev/tests/setup-integration/framework/autoload.php
 			- %rootDir%/../../../dev/tests/static/framework/Magento/PhpStan/autoload.php
+			- %rootDir%/../../autoload.php
+			- %rootDir%/../../thesgroup/magento2-testing-framework/framework/Magento/PhpStan/autoload.php
 	ignoreErrors:
 	    # Ignore PHPStan\Rules\Classes\UnusedConstructorParametersRule
 		- '#Constructor of class [a-zA-Z0-9\\_]+ has an unused parameter#'
@@ -46,7 +53,4 @@ services:
     errorFormatter.filtered:
         class: Magento\PhpStan\Formatters\FilteredErrorFormatter
         arguments:
-            showTipsOfTheDay: false
-            checkThisOnly: false
-            inferPrivatePropertyTypeFromConstructor: true
-            checkMissingTypehints: %checkMissingTypehints%
+            tableErrorFormatter: @errorFormatter.table
