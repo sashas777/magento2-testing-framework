@@ -8,5 +8,5 @@ set -e
 echo "==============================="
 echo "          CODE STYLE TESTS"
 echo "==============================="
-vendor/bin/phpcs --config-set installed_paths vendor/magento/magento-coding-standard/
+vendor/bin/phpcs --config-set installed_paths vendor/magento/magento-coding-standard/,vendor/phpcompatibility/php-compatibility/PHPCompatibility
 vendor/bin/phpcs --ignore=*/vendor/*,*/Test/*  --severity=$PHPCS_SEVERITY --standard=Magento2 .
