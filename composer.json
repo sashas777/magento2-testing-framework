@@ -18,7 +18,7 @@
     "magento/magento-coding-standard": "*",
     "rregeer/phpunit-coverage-check": "*",
     "phpunit/phpunit": "^9",
-    "laminas/laminas-code": "~3.4",
+    "laminas/laminas-code": "~3.4||~3.5||~4.5",
     "phpstan/phpstan": ">=0.12.3 <=0.12.23||~1.2.0",
     "phpmd/phpmd": "@stable",
     "sebastian/phpcpd": "~6.0.0"
