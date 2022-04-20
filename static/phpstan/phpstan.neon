@@ -42,4 +42,4 @@ services:
             checkThisOnly: false
             inferPrivatePropertyTypeFromConstructor: true
             checkMissingTypehints: %checkMissingTypehints%
-
+            tableErrorFormatter: @errorFormatter.table
