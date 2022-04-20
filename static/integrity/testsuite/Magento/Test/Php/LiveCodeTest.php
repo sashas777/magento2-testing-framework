@@ -304,6 +304,7 @@ class LiveCodeTest extends \PHPUnit\Framework\TestCase
         $ignoreList[] = 'clover.xml';
         $ignoreList[] = 'vendor';
         $ignoreList[] = 'etc';
+        $ignoreList[] = 'view';
         $ignoreList[] = 'test-reports';
         $ignoreList[] = 'Test';
 
