@@ -9,6 +9,7 @@ namespace Magento\PhpStan\Formatters;
 
 use PHPStan\Command\AnalysisResult;
 use PHPStan\Command\ErrorFormatter\TableErrorFormatter;
+use PHPStan\Command\ErrorFormatter\ErrorFormatter;
 use PHPStan\Command\Output;
 
 /**
@@ -44,30 +45,34 @@ class FilteredErrorFormatter extends TableErrorFormatter
     private const NO_ERRORS = 0;
 
     /**
+     * @param TableErrorFormatter $tableErrorFormatter
+     */
+    public function __construct(TableErrorFormatter $tableErrorFormatter)
+    {
+        $this->tableErrorFormatter = $tableErrorFormatter;
+    }
+
+    /**
      * @inheritdoc
      */
     public function formatErrors(AnalysisResult $analysisResult, Output $output): int
     {
         if (!$analysisResult->hasErrors()) {
-            $style = $output->getStyle();
-            $style->success('No errors');
+            $output->getStyle()->success('No errors');
             return self::NO_ERRORS;
         }
 
-        $fileSpecificErrorsWithoutIgnoredErrors = $this->clearIgnoredErrors(
-            $analysisResult->getFileSpecificErrors()
-        );
-
         $clearedAnalysisResult = new AnalysisResult(
-            $fileSpecificErrorsWithoutIgnoredErrors,
+            $this->clearIgnoredErrors($analysisResult->getFileSpecificErrors()),
             $analysisResult->getNotFileSpecificErrors(),
+            $analysisResult->getInternalErrors(),
             $analysisResult->getWarnings(),
             $analysisResult->isDefaultLevelUsed(),
-            $analysisResult->hasInferrablePropertyTypesFromConstructor(),
-            $analysisResult->getProjectConfigFile()
+            $analysisResult->getProjectConfigFile(),
+            $analysisResult->isResultCacheSaved()
         );
 
-        return parent::formatErrors($clearedAnalysisResult, $output);
+        return $this->tableErrorFormatter->formatErrors($clearedAnalysisResult, $output);
     }
 
     /**
