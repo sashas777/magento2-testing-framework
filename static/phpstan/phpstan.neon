@@ -2,13 +2,13 @@ parameters:
 	checkExplicitMixedMissingReturn: true
 	checkPhpDocMissingReturn: true
 	reportUnmatchedIgnoredErrors: false
-	excludes_analyse:
+	excludePaths:
 		- %rootDir%/../../../vendor/*
 		- %rootDir%/../../../Tests/*
 		- %rootDir%/../../../Test/*
 		- %rootDir%/../../../test-coverage-html/*
 		- %rootDir%/../../../test-reports/*
-	autoload_files:
+	bootstrapFiles:
 			- %rootDir%/../../autoload.php
 			- %rootDir%/../../thesgroup/magento2-testing-framework/framework/Magento/PhpStan/autoload.php
 	ignoreErrors:
@@ -36,6 +36,6 @@ services:
 
     errorFormatter.filtered:
         class: Magento\PhpStan\Formatters\FilteredErrorFormatter
-	autowired: false
+        autowired: false
         arguments:
             tableErrorFormatter: @errorFormatter.table
