@@ -303,6 +303,7 @@ class LiveCodeTest extends \PHPUnit\Framework\TestCase
         $ignoreList[] = 'composer.lock';
         $ignoreList[] = 'clover.xml';
         $ignoreList[] = 'vendor';
+        $ignoreList[] = 'etc';
         $ignoreList[] = 'test-reports';
         $ignoreList[] = 'Test';
 
