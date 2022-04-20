@@ -38,11 +38,16 @@ use PHPStan\Command\Output;
  *
  * @see \Magento\PhpStan\Formatters\Fixtures\ClassWithIgnoreAnnotation
  */
-class FilteredErrorFormatter extends TableErrorFormatter
+class FilteredErrorFormatter implements ErrorFormatter
 {
     private const MUTE_ERROR_ANNOTATION = 'phpstan:ignore';
 
     private const NO_ERRORS = 0;
+
+    /**
+     * @var TableErrorFormatter
+     */
+    private $tableErrorFormatter;
 
     /**
      * @param TableErrorFormatter $tableErrorFormatter
