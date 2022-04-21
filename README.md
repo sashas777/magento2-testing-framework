@@ -13,6 +13,7 @@ composer require --dev thesgroup/magento2-testing-framework
 ## Tests
 You can run all tests by using the command:
 ```bash
+vendor/bin/phpcs --config-set installed_paths vendor/magento/magento-coding-standard,vendor/phpcompatibility/php-compatibility/PHPCompatibility
 vendor/bin/run-all-tests
 ```
 
@@ -20,6 +21,7 @@ vendor/bin/run-all-tests
 These testsuite includes PHPCS PHPMD PHPCPD PHPStan Tests and strict types declaration.
 You can run only them using following command:
 ```bash
+vendor/bin/phpcs --config-set installed_paths vendor/magento/magento-coding-standard,vendor/phpcompatibility/php-compatibility/PHPCompatibility
 vendor/bin/phpunit --testsuite="PHP Coding Standard Verification" -c vendor/thesgroup/magento2-testing-framework/static/integrity/phpunit.xml
 ```
 
