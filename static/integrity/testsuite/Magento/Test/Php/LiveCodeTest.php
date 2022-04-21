@@ -307,6 +307,7 @@ class LiveCodeTest extends \PHPUnit\Framework\TestCase
         $ignoreList[] = 'view';
         $ignoreList[] = 'test-reports';
         $ignoreList[] = 'Test';
+        $ignoreList[] = 'Setup';
 
         if ($ignoreList) {
             $ignoreListPattern = sprintf('#(%s)#i', implode('|', $ignoreList));
@@ -348,6 +349,8 @@ class LiveCodeTest extends \PHPUnit\Framework\TestCase
         $ignoreList[] = 'clover.xml';
         $ignoreList[] = 'test-reports';
         $ignoreList[] = 'Test';
+        $ignoreList[] = 'Setup';
+        
         if ($ignoreList) {
             $ignoreListPattern = sprintf('#(%s)#i', implode('|', $ignoreList));
             $fileList = array_filter(
@@ -401,6 +404,7 @@ class LiveCodeTest extends \PHPUnit\Framework\TestCase
         $blackList[] = 'vendor';
         $blackList[] = 'test-reports';
         $blackList[] = 'Test';
+        $ignoreList[] = 'Setup';        
         $blackList[] = 'clover.xml';
         $copyPasteDetector->setBlackList($blackList);
 
@@ -486,6 +490,7 @@ class LiveCodeTest extends \PHPUnit\Framework\TestCase
         $blackList[] = 'vendor';
         $blackList[] = 'test-reports';
         $blackList[] = 'Test';
+        $ignoreList[] = 'Setup';        
         $blackList[] = 'clover.xml';
         if ($blackList) {
             $blackListPattern = sprintf('#(%s)#i', implode('|', $blackList));
