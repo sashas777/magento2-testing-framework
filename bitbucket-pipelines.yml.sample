@@ -1,0 +1,39 @@
+image: sashas777/magento-php:7.4-cli
+pipelines:
+    branches:
+        master:
+            - step:
+                  caches:
+                      - composer
+                  name: Build
+                  script:
+                      - composer config --global http-basic.repo.magento.com $MAGENTO_USER $MAGENTO_PASS
+                      - composer require --dev thesgroup/magento2-testing-framework --no-update
+                      - composer install --no-suggest --no-ansi --no-interaction --no-scripts
+                  artifacts:
+                      - vendor/**
+            - parallel:
+                  - step:
+                        caches:
+                            - composer
+                        name: PHP Code Sniffer
+                        script:
+                            - vendor/bin/phpcs --config-set installed_paths vendor/magento/magento-coding-standard,vendor/phpcompatibility/php-compatibility/PHPCompatibility
+                            - vendor/bin/phpunit  -c vendor/thesgroup/magento2-testing-framework/static/integrity/phpunit.xml
+                        artifacts:
+                          - test-reports/**
+                  - step:
+                        caches:
+                            - composer
+                        name: ESLint
+                        script:
+                            - vendor/bin/js-tests
+                  - step:
+                        caches:
+                            - composer
+                        name: Unit Tests
+                        script:
+                            - docker-php-ext-enable xdebug
+                            - vendor/bin/phpunit-tests
+                        artifacts:
+                            - test-coverage-html/**

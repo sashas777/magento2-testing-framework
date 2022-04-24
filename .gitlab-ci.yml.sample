@@ -1,0 +1,53 @@
+image: "sashas777/magento-php:7.4-cli"
+
+stages:
+    - build
+    - test
+
+cache:
+    paths:
+        - ~/.composer/cache/
+
+install:
+    stage: build
+    cache:
+        key: $CI_COMMIT_SHA
+        paths:
+            - vendor/
+            - composer.lock
+    script:
+        - composer config --global http-basic.repo.magento.com $COMPOSER_USER $COMPOSER_PASSWORD
+        - composer require --dev thesgroup/magento2-testing-framework --no-update
+        - composer install --no-scripts --no-suggest --no-ansi --no-interaction --no-progress
+
+phpcs:
+    stage: test
+    cache:
+        key: $CI_COMMIT_SHA
+        paths:
+            - vendor/
+    script:
+      - vendor/bin/phpcs --config-set installed_paths vendor/magento/magento-coding-standard,vendor/phpcompatibility/php-compatibility/PHPCompatibility
+      - vendor/bin/phpunit -c vendor/thesgroup/magento2-testing-framework/static/integrity/phpunit.xml
+
+eslint:
+    stage: test
+    cache:
+        key: $CI_COMMIT_SHA
+        paths:
+            - vendor/
+    script:
+        - vendor/bin/js-tests
+
+phpunit:
+    stage: test
+    cache:
+        key: $CI_COMMIT_SHA
+        paths:
+            - vendor/
+    artifacts:
+        reports:
+            junit: clover.xml
+    script:
+        - docker-php-ext-enable xdebug
+        - vendor/bin/phpunit-tests 95
