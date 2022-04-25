@@ -4,14 +4,25 @@
 Magento 2 static/unit testing framework for a single module tests. It can be used for a pipeline or to  verify a Magento 2 module.
 
 ## Installation
-To use within your Magento 2 project you can use:
+Run the following command on your Magento 2 project:
 
 ```bash
 composer require --dev thesgroup/magento2-testing-framework
 ```
 
-## Execute All Tests
-There is an option to run all tests using one command. These tests are:
+***
+## Pipeline Examples
+Assumes $MAGENTO_USER and $MAGENTO_PASS set as pipeline variables.
+- [Bitbucket pipelines](https://github.com/sashas777/magento2-testing-framework/blob/master/bitbucket-pipelines.yml.sample)
+- [Gitlab CI](https://github.com/sashas777/magento2-testing-framework/blob/master/.gitlab-ci.yml.sample)
+***
+
+## Basic Usage
+In the most cases you may use basic test suite to run PHP code, JavaScript, PhpUnit tests.
+
+### PHP Code
+There is an option to run all php tests using one command.
+It runs following tests:
 - PHP Coding Standard Verification
 - Code Integrity Tests
 - HTML Static Code Analysis
@@ -24,7 +35,7 @@ vendor/bin/phpcs --config-set installed_paths vendor/magento/magento-coding-stan
 vendor/bin/run-all-tests
 ```
 
-## PHPUnit
+### PHPUnit
 Run unit tests and check for code coverage threshold.
 
 ```bash
@@ -40,7 +51,7 @@ To set code coverage threshold 80% (The default value 70%):
 ```bash
 vendor/bin/phpunit-tests 80
 ```
-## Javascript
+### Javascript
 Run ESLint to ensure the quality of your JavaScript code:
 ```bash
 vendor/bin/js-tests
@@ -50,13 +61,7 @@ Fix ESLint Locally:
 npm install eslint --save-dev
 npx eslint -c vendor/thesgroup/magento2-testing-framework/static/js/eslint/.eslintrc --ignore-pattern=vendor/** --no-error-on-unmatched-pattern .
 ```
-***
-
-## Examples
-Assumes $MAGENTO_USER and $MAGENTO_PASS set as pipeline variables.
-- [Bitbucket pipelines](https://github.com/sashas777/magento2-testing-framework/blob/master/bitbucket-pipelines.yml.sample)
-- [Gitlab CI](https://github.com/sashas777/magento2-testing-framework/blob/master/.gitlab-ci.yml.sample)
-
+ 
 ***
 
 ## Advanced Usage
