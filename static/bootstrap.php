@@ -56,7 +56,10 @@ function setCustomErrorHandler()
                 ];
 
                 $errName = isset($errorNames[$errNo]) ? $errorNames[$errNo] : "";
-
+                //PHP 8.1 compatibility
+                if ($errStr == 'auto_detect_line_endings is deprecated') {
+                    return;
+                }
                 throw new \PHPUnit\Framework\Exception(
                     sprintf("%s: %s in %s:%s.", $errName, $errStr, $errFile, $errLine),
                     $errNo
