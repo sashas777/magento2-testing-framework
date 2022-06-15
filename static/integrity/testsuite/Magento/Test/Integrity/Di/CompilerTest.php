@@ -412,7 +412,12 @@ class CompilerTest extends \PHPUnit\Framework\TestCase
                     $plugin = $node->attributes->getNamedItem('type')->nodeValue;
                     if (!in_array($plugin, $this->getPluginBlacklist())) {
                         $plugin = \Magento\Framework\App\Utility\Classes::resolveVirtualType($plugin);
-                        $plugins[] = ['plugin' => $plugin, 'intercepted type' => $type];
+                        if (version_compare(PHP_VERSION, '8.0.0', '<')) {
+                            $plugins[] = ['plugin' => $plugin, 'intercepted type' => $type];
+                        } else {
+                            $plugins[] = [$plugin, $type];
+                        }
+
                     }
                 }
             }

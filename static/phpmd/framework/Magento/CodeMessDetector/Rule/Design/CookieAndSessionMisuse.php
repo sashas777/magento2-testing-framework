@@ -13,7 +13,7 @@ use PHPMD\AbstractNode;
 use PHPMD\AbstractRule;
 use PHPMD\Node\ClassNode;
 use PHPMD\Rule\ClassAware;
-
+use Magento\TestFramework\GetParameterClassTrait;
 /**
  * Session and Cookies must be used only in HTML Presentation layer.
  *
@@ -21,6 +21,8 @@ use PHPMD\Rule\ClassAware;
  */
 class CookieAndSessionMisuse extends AbstractRule implements ClassAware
 {
+    use GetParameterClassTrait;
+
     /**
      * Is given class a controller?
      *
@@ -164,15 +166,18 @@ class CookieAndSessionMisuse extends AbstractRule implements ClassAware
         if ($constructor) {
             foreach ($constructor->getParameters() as $argument) {
                 try {
-                    if ($class = $argument->getClass()) {
-                        if ($class->isSubclassOf(\Magento\Framework\Session\SessionManagerInterface::class)
-                            || $class->getName() === \Magento\Framework\Session\SessionManagerInterface::class
-                            || $class->isSubclassOf(\Magento\Framework\Stdlib\Cookie\CookieReaderInterface::class)
-                            || $class->getName() === \Magento\Framework\Stdlib\Cookie\CookieReaderInterface::class
-                        ) {
-                            return true;
-                        }
+                    $class = $this->getParameterClass($argument);
+                    if ($class === null) {
+                        continue;
                     }
+                    if ($class->isSubclassOf(\Magento\Framework\Session\SessionManagerInterface::class)
+                        || $class->getName() === \Magento\Framework\Session\SessionManagerInterface::class
+                        || $class->isSubclassOf(\Magento\Framework\Stdlib\Cookie\CookieReaderInterface::class)
+                        || $class->getName() === \Magento\Framework\Stdlib\Cookie\CookieReaderInterface::class
+                    ) {
+                        return true;
+                    }
+
                 } catch (\ReflectionException $exception) {
                     //Failed to load the argument's class information
                     continue;
