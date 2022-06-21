@@ -8,12 +8,15 @@ declare(strict_types=1);
 
 namespace Magento\CodeMessDetector\Rule\Design;
 
+use Magento\TestFramework\GetParameterClassTrait;
+use Magento\Framework\Session\SessionManagerInterface;
+use Magento\Framework\Stdlib\Cookie\CookieReaderInterface;
 use PDepend\Source\AST\ASTClass;
 use PHPMD\AbstractNode;
 use PHPMD\AbstractRule;
 use PHPMD\Node\ClassNode;
 use PHPMD\Rule\ClassAware;
-use Magento\TestFramework\GetParameterClassTrait;
+
 /**
  * Session and Cookies must be used only in HTML Presentation layer.
  *
@@ -170,10 +173,10 @@ class CookieAndSessionMisuse extends AbstractRule implements ClassAware
                     if ($class === null) {
                         continue;
                     }
-                    if ($class->isSubclassOf(\Magento\Framework\Session\SessionManagerInterface::class)
-                        || $class->getName() === \Magento\Framework\Session\SessionManagerInterface::class
-                        || $class->isSubclassOf(\Magento\Framework\Stdlib\Cookie\CookieReaderInterface::class)
-                        || $class->getName() === \Magento\Framework\Stdlib\Cookie\CookieReaderInterface::class
+                    if ($class->isSubclassOf(SessionManagerInterface::class)
+                        || $class->getName() === SessionManagerInterface::class
+                        || $class->isSubclassOf(CookieReaderInterface::class)
+                        || $class->getName() === CookieReaderInterface::class
                     ) {
                         return true;
                     }

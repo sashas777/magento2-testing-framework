@@ -14,6 +14,7 @@ use PHPMD\Rule\MethodAware;
 /**
  * Magento is a highly extensible and customizable platform.
  * Usage of final classes and methods is prohibited.
+ * @todo not enforced in 2.4.4
  */
 class FinalImplementation extends AbstractRule implements ClassAware, MethodAware
 {
