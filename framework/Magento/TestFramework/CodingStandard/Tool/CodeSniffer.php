@@ -97,7 +97,7 @@ class CodeSniffer implements ToolInterface, ExtensionInterface
         $this->wrapper->checkRequirements();
         $settings = [];
         $settings['files'] = $whiteList;
-        $settings['standards'] = [$this->rulesetDir];
+        $settings['standards'] = [BP.'/vendor/phpcompatibility/php-compatibility/PHPCompatibility/', $this->rulesetDir];
         $settings['extensions'] = $this->extensions;
         $settings['parallel'] = true;
         $settings['errorSeverity'] = 1;

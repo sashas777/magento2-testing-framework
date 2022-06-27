@@ -50,11 +50,11 @@ class SchemaTest extends \PHPUnit\Framework\TestCase
                 try {
                     $errors = \Magento\Framework\Config\Dom::validateDomDocument($dom, $schemaLocations[1]);
                 } catch (\Exception $exception) {
-                    $errors = [$exception->__toString()];
+                    $errors = [$exception->getMessage()];
                 }
                 $this->assertEmpty(
                     $errors,
-                    "Error validating $filename against {$schemaLocations[1]}\n" . print_r($errors, true)
+                    "Error validating $filename against {$schemaLocations[1]}\n" . implode(" \n",$errors)
                 );
             },
             $this->getXmlFiles()
