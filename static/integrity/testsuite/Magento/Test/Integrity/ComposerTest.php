@@ -65,7 +65,6 @@ class ComposerTest extends \PHPUnit\Framework\TestCase
     private function assertMagentoConventions($dir, \StdClass $json)
     {
         $this->assertObjectHasAttribute('name', $json);
-        $this->assertObjectHasAttribute('license', $json);
         $this->assertObjectHasAttribute('type', $json);
         $this->assertObjectHasAttribute('require', $json);
         $packageType = $json->type;
@@ -76,21 +75,17 @@ class ComposerTest extends \PHPUnit\Framework\TestCase
                 $this->assertDependsOnPhp($json->require);
                 $this->assertDependsOnFramework($json->require);
                 $this->assertAutoload($json);
-                $this->assertVersionNotSpecified($json);
                 break;
             case 'magento2-language':
                 $this->assertDependsOnFramework($json->require);
-                $this->assertVersionNotSpecified($json);
                 break;
             case 'magento2-theme':
                 $this->assertDependsOnPhp($json->require);
                 $this->assertDependsOnFramework($json->require);
-                $this->assertVersionNotSpecified($json);
                 break;
             case 'magento2-library':
                 $this->assertDependsOnPhp($json->require);
                 $this->assertAutoload($json);
-                $this->assertVersionNotSpecified($json);
                 break;
             default:
                 throw new \InvalidArgumentException("Unknown package type {$packageType}");
