@@ -14,6 +14,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\UrlInterface;
 use Magento\TestFramework\Dependency\Route\RouteMapper;
 use Magento\TestFramework\Exception\NoSuchActionException;
+use Magento\TestFramework\Dependency\Reader\ClassScanner;
 
 /**
  * Rule to check the dependencies between modules based on references, getUrl and layout blocks
@@ -80,24 +81,34 @@ class PhpRule implements RuleInterface
     private $whitelists;
 
     /**
+     * @var ClassScanner
+     */
+    private $classScanner;
+
+    /**
      * @param array $mapRouters
      * @param array $mapLayoutBlocks
      * @param array $pluginMap
      * @param array $whitelists
+     * @param ClassScanner|null $classScanner
+     * @param RouteMapper|null $routeMapper
      * @throws \Exception
      */
     public function __construct(
         array $mapRouters,
         array $mapLayoutBlocks,
         array $pluginMap = [],
-        array $whitelists = []
+        array $whitelists = [],
+        ClassScanner $classScanner = null,
+        RouteMapper $routeMapper = null
     ) {
         $this->_mapRouters = $mapRouters;
         $this->_mapLayoutBlocks = $mapLayoutBlocks;
         $this->_namespaces = implode('|', \Magento\Framework\App\Utility\Files::init()->getNamespaces());
         $this->pluginMap = $pluginMap ?: null;
-        $this->routeMapper = new RouteMapper();
+        $this->routeMapper = $routeMapper ?? new RouteMapper();
         $this->whitelists = $whitelists;
+        $this->classScanner = $classScanner ?? new ClassScanner();
     }
 
     /**
@@ -154,12 +165,13 @@ class PhpRule implements RuleInterface
     private function caseClassesAndIdentifiers($currentModule, $file, &$contents)
     {
         $pattern = '~\b(?<class>(?<module>('
-            . implode(
-                '[_\\\\]|',
-                Files::init()->getNamespaces()
-            )
-            . '[_\\\\])[a-zA-Z0-9]+)'
-            . '(?<class_inside_module>[a-zA-Z0-9_\\\\]*))\b(?:::(?<module_scoped_key>[a-z0-9_]+)[\'"])?~';
+                   . implode(
+                       '[_\\\\]|',
+                       Files::init()->getNamespaces()
+                   )
+                   . '(?<delimiter>[_\\\\]))[a-zA-Z0-9]{2,})'
+                   . '(?<class_inside_module>\\4[a-zA-Z0-9_\\\\]{2,})?)\b'
+                   . '(?:::(?<module_scoped_key>[A-Za-z0-9_/.]+)[\'"])?~';
 
         if (!preg_match_all($pattern, $contents, $matches)) {
             return [];
@@ -177,14 +189,14 @@ class PhpRule implements RuleInterface
             if (empty($matches['class_inside_module'][$i]) && !empty($matches['module_scoped_key'][$i])) {
                 $dependencyType = RuleInterface::TYPE_SOFT;
             } else {
-                $currentClass = $this->getClassFromFilepath($file, $currentModule);
+                $currentClass = $this->getClassFromFilepath($file);
                 $dependencyType = $this->isPluginDependency($currentClass, $dependencyClass)
                     ? RuleInterface::TYPE_SOFT
                     : RuleInterface::TYPE_HARD;
             }
 
             $dependenciesInfo[] = [
-                'module' => $referenceModule,
+                'modules' => [$referenceModule],
                 'type' => $dependencyType,
                 'source' => $dependencyClass,
             ];
@@ -197,19 +209,11 @@ class PhpRule implements RuleInterface
      * Get class name from filename based on class/file naming conventions
      *
      * @param string $filepath
-     * @param string $module
      * @return string
      */
-    private function getClassFromFilepath($filepath, $module)
+    private function getClassFromFilepath($filepath)
     {
-        $class = strstr($filepath, str_replace(['_', '\\', '/'], DIRECTORY_SEPARATOR, $module));
-        //sashas
-        if (!$class) {
-            $class =  str_replace(['_', '\\', '/'], DIRECTORY_SEPARATOR, $module);
-        }
-        //sashas
-        $class = str_replace(DIRECTORY_SEPARATOR, '\\', strstr($class, '.php', true));
-        return $class;
+        return $this->classScanner->getClassName($filepath);
     }
 
     /**
