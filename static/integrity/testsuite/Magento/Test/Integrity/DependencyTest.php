@@ -400,17 +400,23 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
         foreach (self::$_rulesInstances as $rule) {
             /** @var \Magento\TestFramework\Dependency\RuleInterface $rule */
             $newDependencies = $rule->getDependencyInfo($module, $fileType, $file, $contents);
-            //phpcs:ignore Magento2.Performance.ForeachArrayMerge
-            $dependencies = array_merge($dependencies, $newDependencies);
+            $dependencies[] = $newDependencies;
         }
-        foreach ($dependencies as $key => $dependency) {
+        $dependencies = array_merge([], ...$dependencies);
+
+        foreach ($dependencies as $dependencyKey => $dependency) {
             foreach (self::$whiteList as $namespace) {
                 if (strpos($dependency['source'], $namespace) !== false) {
-                    $dependency['module'] = $namespace;
-                    $dependencies[$key] = $dependency;
+                    $dependency['modules'] = [$namespace];
+                    $dependencies[$dependencyKey] = $dependency;
                 }
             }
+            $dependency['type'] = $dependency['type'] ?? 'type is unknown';
+            if (empty($dependency['modules'])) {
+                unset($dependencies[$dependencyKey]);
+            }
         }
+
         return $dependencies;
     }
 
@@ -449,12 +455,7 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
 
         $declared = $type == self::TYPE_SOFT ? array_merge($soft, $hard) : $hard;
 
-        if (isset($dependency['modules'])) {
-            $modules = $dependency['modules'];
-        }else {
-            // pre 2.4.4 compatibility
-            $modules = $dependency['module'];
-        }
+        $modules = $dependency['modules'];
 
         $this->collectConditionalDependencies($modules, $type, $currentModule, $declared, $undeclared);
     }
