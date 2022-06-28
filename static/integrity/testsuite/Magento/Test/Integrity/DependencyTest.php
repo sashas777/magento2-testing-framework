@@ -449,7 +449,13 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
 
         $declared = $type == self::TYPE_SOFT ? array_merge($soft, $hard) : $hard;
 
-        $modules = $dependency['modules'];
+        if (isset($dependency['modules'])) {
+            $modules = $dependency['modules'];
+        }else {
+            // pre 2.4.4 compatibility
+            $modules = $dependency['module'];
+        }
+
         $this->collectConditionalDependencies($modules, $type, $currentModule, $declared, $undeclared);
     }
 
