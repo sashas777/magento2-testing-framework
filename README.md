@@ -35,6 +35,10 @@ vendor/bin/phpcs --config-set installed_paths vendor/magento/magento-coding-stan
 vendor/bin/run-all-tests
 ```
 
+When you need to delete test files you can use the cleanup command:
+```bash
+vendor/bin/cleanup
+```
 ### PHPUnit
 Run unit tests and check for code coverage threshold.
 

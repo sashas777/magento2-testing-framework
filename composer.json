@@ -50,7 +50,8 @@
     "bin/phpmd-tests",
     "bin/js-tests",
     "bin/phpstan-tests",
-    "bin/run-all-tests"
+    "bin/run-all-tests",
+    "bin/cleanup"
   ],
   "config": {
     "allow-plugins": {
