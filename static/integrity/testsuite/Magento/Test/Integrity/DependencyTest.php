@@ -325,7 +325,7 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
      */
     public function testUndeclared()
     {
-        $invoker = new \Magento\Framework\App\Utility\AggregateInvoker($this);
+        $invoker = new \Magento\Test\CustomAggregateInvoker($this);
         $invoker(
             /**
              * Check undeclared modules dependencies for specified file

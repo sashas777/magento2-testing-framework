@@ -11,7 +11,7 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
 {
     public function testPaymentMethods()
     {
-        $invoker = new \Magento\Framework\App\Utility\AggregateInvoker($this);
+        $invoker = new \Magento\Test\CustomAggregateInvoker($this);
         $invoker(
             /**
              * Verify whether all payment methods are declared in appropriate modules

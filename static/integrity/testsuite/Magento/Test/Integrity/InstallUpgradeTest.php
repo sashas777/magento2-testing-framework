@@ -7,7 +7,7 @@
 namespace Magento\Test\Integrity;
 
 use Magento\Framework\App\Utility\Files;
-use Magento\Framework\App\Utility\AggregateInvoker;
+use Magento\Test\CustomAggregateInvoker;
 use Magento\Framework\Component\ComponentRegistrar;
 
 /**
@@ -24,7 +24,7 @@ class InstallUpgradeTest extends \PHPUnit\Framework\TestCase
             $scriptPattern[] = $moduleDir . '/data';
             $scriptPattern[] = $moduleDir . '/Setup';
         }
-        $invoker = new AggregateInvoker($this);
+        $invoker = new CustomAggregateInvoker($this);
         $invoker(
             /**
              * @param string $file

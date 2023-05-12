@@ -18,7 +18,7 @@ class ComposerTest extends \PHPUnit\Framework\TestCase
 {
     public function testValidComposerJson()
     {
-        $invoker = new \Magento\Framework\App\Utility\AggregateInvoker($this);
+        $invoker = new \Magento\Test\CustomAggregateInvoker($this);
         $invoker(
             /**
              * @param string $dir

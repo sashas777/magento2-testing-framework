@@ -14,6 +14,7 @@ use PHPUnit\TextUI\ResultPrinter;
 
 /**
  * Class CustomResultPrinter
+ * Do not show debug trace
  */
 class CustomResultPrinter extends DefaultResultPrinter implements ResultPrinter
 {
@@ -29,7 +30,7 @@ class CustomResultPrinter extends DefaultResultPrinter implements ResultPrinter
         if ($this->debug) {
             $this->printDefectTrace($defect);
         } else {
-            $this->write((string) $defect->exceptionMessage());
+            $this->writeln((string) $defect->exceptionMessage());
         }
     }
 }
