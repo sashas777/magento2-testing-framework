@@ -30,7 +30,7 @@ class CustomResultPrinter extends DefaultResultPrinter implements ResultPrinter
         if ($this->debug) {
             $this->printDefectTrace($defect);
         } else {
-            $this->writeln((string) $defect->exceptionMessage());
+            $this->write((string) $defect->exceptionMessage()."\n");
         }
     }
 }
