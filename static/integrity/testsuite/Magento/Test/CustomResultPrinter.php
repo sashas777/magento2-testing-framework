@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace TheSGroup\StaticTests;
+namespace Magento\Test;
 
 use PHPUnit\Framework\TestFailure;
 use PHPUnit\TextUI\DefaultResultPrinter;

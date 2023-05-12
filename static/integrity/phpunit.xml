@@ -9,7 +9,7 @@
          colors="false"
          columns="max"
          beStrictAboutTestsThatDoNotTestAnything="false"
-         printerClass="TheSGroup\StaticTests\CustomResultPrinter"
+         printerClass="Magento\Test\CustomResultPrinter"
          bootstrap="../bootstrap.php">
     <testsuites>
         <testsuite name="PHP Coding Standard Verification">
