@@ -64,9 +64,10 @@ class ComposerTest extends \PHPUnit\Framework\TestCase
      */
     private function assertMagentoConventions($dir, \StdClass $json)
     {
-        $this->assertObjectHasAttribute('name', $json);
-        $this->assertObjectHasAttribute('type', $json);
-        $this->assertObjectHasAttribute('require', $json);
+        $this->assertTrue(property_exists($json, 'name'));
+        $this->assertTrue(property_exists($json, 'type'));
+        $this->assertTrue(property_exists($json, 'require'));
+
         $packageType = $json->type;
 
         switch ($packageType) {
@@ -111,8 +112,7 @@ class ComposerTest extends \PHPUnit\Framework\TestCase
     private function assertAutoload(\StdClass $json)
     {
         $errorMessage = 'There must be an "autoload->psr-4" section in composer.json of each Magento component.';
-        $this->assertObjectHasAttribute('autoload', $json, $errorMessage);
-        $this->assertObjectHasAttribute('psr-4', $json->autoload, $errorMessage);
+        $this->assertTrue(property_exists($json->autoload, 'psr-4'), $errorMessage);
     }
 
     /**
@@ -122,7 +122,7 @@ class ComposerTest extends \PHPUnit\Framework\TestCase
      */
     private function assertDependsOnPhp(\StdClass $json)
     {
-        $this->assertObjectHasAttribute('php', $json, 'This component is expected to depend on certain PHP version(s)');
+        $this->assertTrue(property_exists($json, 'php'), 'This component is expected to depend on certain PHP version(s)');
     }
 
     /**
@@ -132,10 +132,6 @@ class ComposerTest extends \PHPUnit\Framework\TestCase
      */
     private function assertDependsOnFramework(\StdClass $json)
     {
-        $this->assertObjectHasAttribute(
-            'magento/framework',
-            $json,
-            'This component is expected to depend on magento/framework'
-        );
+        $this->assertTrue(property_exists($json, 'magento/framework'), 'This component is expected to depend on magento/framework');
     }
 }
