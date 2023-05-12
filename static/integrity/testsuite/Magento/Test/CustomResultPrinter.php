@@ -28,6 +28,8 @@ class CustomResultPrinter extends DefaultResultPrinter implements ResultPrinter
         $this->printDefectHeader($defect, $count);
         if ($this->debug) {
             $this->printDefectTrace($defect);
+        } else {
+            $this->write((string) $defect->exceptionMessage());
         }
     }
 }
