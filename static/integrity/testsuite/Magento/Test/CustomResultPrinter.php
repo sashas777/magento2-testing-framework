@@ -12,8 +12,17 @@ use PHPUnit\Framework\TestFailure;
 use PHPUnit\TextUI\DefaultResultPrinter;
 use PHPUnit\TextUI\ResultPrinter;
 
+/**
+ * Class CustomResultPrinter
+ */
 class CustomResultPrinter extends DefaultResultPrinter implements ResultPrinter
 {
+    /**
+     * @param TestFailure $defect
+     * @param int $count
+     *
+     * @return void
+     */
     protected function printDefect(TestFailure $defect, int $count): void
     {
         $this->printDefectHeader($defect, $count);
