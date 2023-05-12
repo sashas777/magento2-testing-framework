@@ -21,6 +21,7 @@ rm -rf  package.json
 
 if [[ -z "${UNIT_COVERAGE_THRESHOLD}" ]]; then
   UNIT_COVERAGE_THRESHOLD=70
+fi
 
 echo "==============================="
 echo "          UNIT TESTS"

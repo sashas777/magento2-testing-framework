@@ -17,7 +17,7 @@
     "magento/module-webapi": "100.4.*",
     "magento/magento-coding-standard": "*",
     "rregeer/phpunit-coverage-check": "*",
-    "phpunit/phpunit": "^9",
+    "phpunit/phpunit": "^9.5",
     "laminas/laminas-code": "~4.5",
     "phpstan/phpstan": "~1.2.0",
     "phpmd/phpmd": "@stable",
@@ -51,5 +51,10 @@
     "bin/js-tests",
     "bin/phpstan-tests",
     "bin/run-all-tests"
-  ]
+  ],
+  "config": {
+    "allow-plugins": {
+      "magento/composer-dependency-version-audit-plugin": true
+    }
+  }
 }
