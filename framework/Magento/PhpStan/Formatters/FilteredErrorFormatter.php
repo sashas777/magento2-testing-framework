@@ -41,7 +41,6 @@ use PHPStan\Command\Output;
 class FilteredErrorFormatter implements ErrorFormatter
 {
     private const MUTE_ERROR_ANNOTATION = 'phpstan:ignore';
-
     private const NO_ERRORS = 0;
 
     /**
@@ -67,14 +66,19 @@ class FilteredErrorFormatter implements ErrorFormatter
             return self::NO_ERRORS;
         }
 
+        //@phpstan:ignore-line
         $clearedAnalysisResult = new AnalysisResult(
             $this->clearIgnoredErrors($analysisResult->getFileSpecificErrors()),
             $analysisResult->getNotFileSpecificErrors(),
             $analysisResult->getInternalErrors(),
             $analysisResult->getWarnings(),
+            $analysisResult->getCollectedData(),
             $analysisResult->isDefaultLevelUsed(),
             $analysisResult->getProjectConfigFile(),
-            $analysisResult->isResultCacheSaved()
+            $analysisResult->isResultCacheSaved(),
+            $analysisResult->getPeakMemoryUsageBytes(),
+            $analysisResult->isResultCacheUsed(),
+            []
         );
 
         return $this->tableErrorFormatter->formatErrors($clearedAnalysisResult, $output);
