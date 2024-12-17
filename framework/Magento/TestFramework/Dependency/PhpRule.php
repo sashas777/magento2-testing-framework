@@ -85,6 +85,8 @@ class PhpRule implements RuleInterface
      */
     private $classScanner;
 
+    private $_namespaces;
+
     /**
      * @param array $mapRouters
      * @param array $mapLayoutBlocks
